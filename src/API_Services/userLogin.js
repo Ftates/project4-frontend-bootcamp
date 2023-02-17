@@ -1,11 +1,11 @@
 import axios from "axios";
 import errorHandler from "../helpers/errorHandler";
 
-const userLogin = async (name, password) => {
+const userLogin = async (email, password) => {
 
     try {
         const { data } = await axios ({
-            data: {name: name, password: password},
+            data: {email: email, password: password},
             method: "POST",
             url: "http://localhost:3001/users/login"
         })

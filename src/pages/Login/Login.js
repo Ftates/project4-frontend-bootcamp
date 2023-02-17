@@ -5,7 +5,7 @@ import { useAuth } from "../../AuthContext/AuthContext";
 
 export default function Login() {
 
-  const [username, setUsername] = useState()
+  const [email, setEmail] = useState()
   const [password, setPassword] = useState()
   const [errorMessage, setErrorMessage] = useState("")
 
@@ -14,7 +14,7 @@ export default function Login() {
   const handleSubmit = (e) => {
     e.preventDefault()
     // api call to login
-    userLogin(username,password)
+    userLogin(email,password)
       .then(setAuthState)
   }
 
@@ -27,13 +27,13 @@ export default function Login() {
           <h2 style={{color:'whitesmoke'}}>Login</h2>
 
           <label>
-            <span style={{color:'whitesmoke'}}>Enter username:</span>
+            <span style={{color:'whitesmoke'}}>Enter email:</span>
             <input
-                name='name'
+                name='email'
                 required
                 type={'text'}
-                placeholder='Your Username'
-                onChange={(e)=>{setUsername(e.target.value)}}
+                placeholder='Your Email'
+                onChange={(e)=>{setEmail(e.target.value)}}
             />
           </label>
 
