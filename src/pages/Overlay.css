@@ -1,0 +1,36 @@
+.DropdownMenu {
+    height: 0;
+    overflow: hidden;
+    transition: height 0.2s ease-out, opacity 0.2s ease-out;
+    opacity: 0;
+}
+
+.DropdownMenu.open {
+    transition: height 0.2s ease-out, opacity 0.2s ease-out;    
+    height: auto;
+    opacity: 1;
+}
+
+.overlayBanner {
+    position: absolute;
+    display: flex;
+    justify-content: space-between;
+    width: 100vw;
+}
+
+.overlayLogo {
+    display: flex;
+    font-size: 32px;
+    padding: 15px;
+    margin-left: 2.5vw;
+    color: whitesmoke;
+}
+
+.DropdownMenuLogo {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    padding: 15px;
+    margin-right: 2.5vw;
+    margin-top: 2.5vh;
+}
