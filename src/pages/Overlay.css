@@ -29,7 +29,7 @@
 .DropdownMenuLogo {
     display: flex;
     flex-direction: column;
-    align-items: end;
+    align-items: flex-end;
     padding: 15px;
     margin-right: 2.5vw;
     margin-top: 2.5vh;

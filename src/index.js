@@ -1,8 +1,8 @@
 // Packages
-import React, { useState } from "react";
+import React, { createContext, useContext, useState } from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-
+import AuthProvider from "./AuthContext/AuthContext.js";
 
 // Import Route Components
 import "./index.css";
@@ -18,6 +18,8 @@ import { Word4 } from "./pages/Home/Word4";
 import { Word5 } from "./pages/Home/Word5";
 import Login from "./pages/Login/Login";
 import { Register } from "./pages/Register/Register";
+
+// console.log("authprovider",AuthProvider)
 
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
@@ -71,6 +73,8 @@ const useNavigateMap = (route) => {
   }
 }
 
+
+
 root.render(
   // <React.StrictMode>
   <>
@@ -80,23 +84,25 @@ root.render(
       callNavigate={(e)=>{useNavigateMap(e)}}
       />
     <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Overlay/>}>
-          <Route path="/" element={<App onChildEvent={(e)=>handleAnimationEvent(e)}/>} />
-          <Route path="/learnMore" element={<LearnMore onChildEvent={retrieveNavigateEvent}/>}>
-            <Route path="/learnMore/word0" element={<Word0 onChildEvent={(e)=>handleAnimationEvent(e)}/>}/>
-            <Route path="/learnMore/word1" element={<Word1 onChildEvent={(e)=>handleAnimationEvent(e)}/>}/>
-            <Route path="/learnMore/word2" element={<Word2 onChildEvent={(e)=>handleAnimationEvent(e)}/>}/>
-            <Route path="/learnMore/word3" element={<Word3 onChildEvent={(e)=>handleAnimationEvent(e)}/>}/>
-            <Route path="/learnMore/word4" element={<Word4 onChildEvent={(e)=>handleAnimationEvent(e)}/>}/>
-            <Route path="/learnMore/word5" element={<Word5 onChildEvent={(e)=>handleAnimationEvent(e)}/>}/>
+      <AuthProvider>
+        <Routes>
+          <Route path="/" element={<Overlay/>}>
+            <Route path="/" element={<App onChildEvent={(e)=>handleAnimationEvent(e)}/>} />
+            <Route path="/learnMore" element={<LearnMore onChildEvent={retrieveNavigateEvent}/>}>
+              <Route path="/learnMore/word0" element={<Word0 onChildEvent={(e)=>handleAnimationEvent(e)}/>}/>
+              <Route path="/learnMore/word1" element={<Word1 onChildEvent={(e)=>handleAnimationEvent(e)}/>}/>
+              <Route path="/learnMore/word2" element={<Word2 onChildEvent={(e)=>handleAnimationEvent(e)}/>}/>
+              <Route path="/learnMore/word3" element={<Word3 onChildEvent={(e)=>handleAnimationEvent(e)}/>}/>
+              <Route path="/learnMore/word4" element={<Word4 onChildEvent={(e)=>handleAnimationEvent(e)}/>}/>
+              <Route path="/learnMore/word5" element={<Word5 onChildEvent={(e)=>handleAnimationEvent(e)}/>}/>
+            </Route>
+            <Route path="/login" element={<Login/>}/>
+            <Route path="/register" element={<Register/>}/>
           </Route>
-          <Route path="/login" element={<Login/>}/>
-          <Route path="/register" element={<Register/>}/>
-          
-        </Route>
-      </Routes>
+        </Routes>
+      </AuthProvider>
     </BrowserRouter>
+    
   </>
   // </React.StrictMode>
 );

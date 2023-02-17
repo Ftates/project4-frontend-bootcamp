@@ -9,16 +9,29 @@ import Grow from '@mui/material/Grow';
 import ClickAwayListener from '@mui/material/ClickAwayListener';
 import Popper from '@mui/material/Popper';
 import './Overlay.css'
+import { useAuth } from '../AuthContext/AuthContext';
 
 
 export const Overlay = () => {
 
-
+  const {header, isAuth, loggedUser, setAuthState} = useAuth()
+  
   const [menuOpenState,setMenuOpenState] = useState(false)
-  const anchorRef = useRef(null);
   const navigate = useNavigate()
 
-  console.log(menuOpenState)
+  console.log("AVENGERS ASSEMBLE", header, isAuth, loggedUser)
+
+  const handleLogout = () => {
+    localStorage.removeItem("loggedUser")
+    setAuthState({
+      email: "",
+      username: "",
+      profileImg: null,
+      biography: null,
+      token: "",
+      })
+    navigate("/")
+  }
 
   return (
     <>
@@ -29,7 +42,20 @@ export const Overlay = () => {
           <div className='DropdownMenuLogo'>
             <MenuIcon onClick={()=>{setMenuOpenState(!menuOpenState)}} sx={{color:"whiteSmoke", fontSize:"32px", cursor:"pointer"}}/>
            <div className={`DropdownMenu ${menuOpenState === true ? 'open' : ''}`}>
-              <Paper sx={{backgroundColor:"transparent", color:"white"}}>
+              {isAuth ? 
+                <Paper sx={{backgroundColor:"transparent", color:"white"}}>
+                  <MenuList>
+                    <MenuItem onClick={()=>{}}>Profile</MenuItem>
+                    <Divider sx={{backgroundColor:"white"}}/>
+                    <MenuItem onClick={()=>{}}>Dashboard</MenuItem>
+                    <Divider sx={{backgroundColor:"white"}}/>
+                    <MenuItem onClick={()=>{}}>Charts</MenuItem>
+                    <Divider sx={{backgroundColor:"white"}}/>
+                    <MenuItem onClick={()=>{handleLogout()}}>Logout</MenuItem>
+                  </MenuList>
+                </Paper>
+              :
+                <Paper sx={{backgroundColor:"transparent", color:"white"}}>
                   <MenuList>
                     <MenuItem onClick={()=>{navigate("/login")}}>Login</MenuItem>
                     <Divider sx={{backgroundColor:"white"}}/>
@@ -37,7 +63,8 @@ export const Overlay = () => {
                     {/* <Divider sx={{backgroundColor:"white"}}/>
                     <MenuItem>Logout</MenuItem> */}
                   </MenuList>
-              </Paper>
+                </Paper>
+              }
             </div>
             
           </div>
