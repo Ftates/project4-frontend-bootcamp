@@ -48,6 +48,7 @@ const retrieveToggleDisplay = (func) => {
 // getting event from React app to call the specific funtion from 
 const handleAnimationEvent = (route) => {
   // console.log("alivent check")
+  if(route === "toHomePageView")animationMap.animateMeshtoHomePageView()
   if(route === "toLearnMoreView")animationMap.animateMeshToLearnMoreView()
   if(route === "toLearnMoreView2")animationMap.animateMeshToLearnMoreView2()
   if(route === "word0View")animationMap.animateMeshToScrollView()
@@ -86,7 +87,7 @@ root.render(
     <BrowserRouter>
       <AuthProvider>
         <Routes>
-          <Route path="/" element={<Overlay/>}>
+          <Route path="/" element={<Overlay onChildEvent={(e)=>{handleAnimationEvent(e)}}/>}>
             <Route path="/" element={<App onChildEvent={(e)=>handleAnimationEvent(e)}/>} />
             <Route path="/learnMore" element={<LearnMore onChildEvent={retrieveNavigateEvent}/>}>
               <Route path="/learnMore/word0" element={<Word0 onChildEvent={(e)=>handleAnimationEvent(e)}/>}/>

@@ -363,6 +363,25 @@ export const Bitcoin = (props) => {
             .add('start')
       }
 
+      const animateMeshtoHomePageView = () => {
+        setCameraScene("welcomeScene")
+        const timeline = new gsap.timeline()
+        timeline
+            .add('start')
+            .to(cameraRef.current.position, {
+              duration: 0.75,
+              x: 0,
+              y: 0,
+              z: 4.5,
+            }, 'start')
+            .to(cameraRef.current.quaternion, {
+              duration: 0.75,
+              w: 1,
+              x: 0,
+              y: 0,
+              z: 0,
+            }, 'start')
+      }
 
 
 
@@ -418,6 +437,7 @@ export const Bitcoin = (props) => {
         animateMeshToScrollView3:animateMeshToScrollView3,
         animateMeshToScrollView4:animateMeshToScrollView4,
         animateMeshToScrollView5:animateMeshToScrollView5,
+        animateMeshtoHomePageView:animateMeshtoHomePageView,
       }
 
       // exporting all animation function to top level to be called by other components
@@ -446,7 +466,7 @@ export const Bitcoin = (props) => {
     ref={word0Ref}
     onPointerEnter={()=>setWord0Hover(true)}
     onPointerOut={()=>setWord0Hover(false)}
-    scale={word0Hover===true? 1.1 : 1}
+    scale={word0Hover===true? 1.01 : 1}
     onClick={()=>{console.log("word0 Clicked"); animateMeshToScrollView(); props.callNavigate("word0")}}
     >
     </mesh>
@@ -456,7 +476,7 @@ export const Bitcoin = (props) => {
     ref={word1Ref}
     onPointerEnter={()=>setWord1Hover(true)}
     onPointerOut={()=>setWord1Hover(false)}
-    scale={word1Hover===true? 1.1 : 1}
+    scale={word1Hover===true? 1.01 : 1}
     onClick={()=>{console.log("word1 Clicked"); animateMeshToScrollView1(); props.callNavigate("word1")}}
 
     >
@@ -467,7 +487,7 @@ export const Bitcoin = (props) => {
     ref={word2Ref}
     onPointerEnter={()=>setWord2Hover(true)}
     onPointerOut={()=>setWord2Hover(false)}
-    scale={word2Hover===true? 1.1 : 1}
+    scale={word2Hover===true? 1.01 : 1}
     onClick={()=>{console.log("word2 Clicked"); animateMeshToScrollView2(); props.callNavigate("word2")}}
 
     >
@@ -478,7 +498,7 @@ export const Bitcoin = (props) => {
     ref={word3Ref}
     onPointerEnter={()=>setWord3Hover(true)}
     onPointerOut={()=>setWord3Hover(false)}
-    scale={word3Hover===true? 1.1 : 1}
+    scale={word3Hover===true? 1.01 : 1}
     onClick={()=>{console.log("word3 Clicked"); animateMeshToScrollView3(); props.callNavigate("word3")}}
 
     >
@@ -489,7 +509,7 @@ export const Bitcoin = (props) => {
     ref={word4Ref}
     onPointerEnter={()=>setWord4Hover(true)}
     onPointerOut={()=>setWord4Hover(false)}
-    scale={word4Hover===true? 1.1 : 1}
+    scale={word4Hover===true? 1.01 : 1}
     onClick={()=>{console.log("word4 Clicked"); animateMeshToScrollView4(); props.callNavigate("word4")}}
 
     >
@@ -500,7 +520,7 @@ export const Bitcoin = (props) => {
     ref={word5Ref}
     onPointerEnter={()=>setWord5Hover(true)}
     onPointerOut={()=>setWord5Hover(false)}
-    scale={word5Hover===true? 1.1 : 1}
+    scale={word5Hover===true? 1.01 : 1}
     onClick={()=>{console.log("word5 Clicked"); animateMeshToScrollView5(); props.callNavigate("word5")}}
 
     >

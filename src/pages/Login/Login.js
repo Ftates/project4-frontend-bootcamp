@@ -23,32 +23,33 @@ export default function Login() {
     <>
       <div className="Screen">
         {errorMessage === "" ? <span></span> : <span>{`${errorMessage}`}</span>}
-        <form className="form" onSubmit={(e)=>{handleSubmit(e)}}>
-          <h2 style={{color:'whitesmoke'}}>Login</h2>
+        <form onSubmit={(e)=>{handleSubmit(e)}}>
+          <div className="formContainer">
+            <h1 className="formContainerLabel">Login</h1>
+            <div className="formInput">
+                <h3 style={{color:'whitesmoke'}}>Email:</h3>
+                <input
+                    name='email'
+                    required
+                    type={'text'}
+                    placeholder='Your Email'
+                    onChange={(e)=>{setEmail(e.target.value)}}
+                />
 
-          <label>
-            <span style={{color:'whitesmoke'}}>Enter email:</span>
-            <input
-                name='email'
-                required
-                type={'text'}
-                placeholder='Your Email'
-                onChange={(e)=>{setEmail(e.target.value)}}
-            />
-          </label>
-
-          <label>
-            <span style={{color:'whitesmoke'}}>Enter password:</span>
-            <input
-                name='password'
-                required
-                type={'text'}
-                placeholder='password'
-                onChange={(e)=>{setPassword(e.target.value)}}
-                minLength="8" 
-            />
-          </label>
-          <button className="btn">Login</button>
+                <h3 style={{color:'whitesmoke'}}>Password:</h3>
+                <input
+                    name='password'
+                    required
+                    type={'text'}
+                    placeholder='password'
+                    onChange={(e)=>{setPassword(e.target.value)}}
+                    minLength="8" 
+                />
+              <button className="btn">Login</button>
+            </div>
+            
+          </div>
+          
         </form>
       </div>
       

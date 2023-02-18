@@ -34,30 +34,33 @@ export const Register = () => {
             <div className='errorBox'></div>
 
             <form onSubmit={(e)=>{handleSubmit(e)}}>
-              <h2 style={{color:'whitesmoke'}}>Register:</h2>
-
-              <label style={{color:'whitesmoke'}}>Email:</label>
-              <input 
-                name='email'
-                required
-                type={'text'}
-                placeholder='Your Email'
-                onChange={(e)=>{setEmail(e.target.value)}}/>
-              <label style={{color:'whitesmoke'}}>Username:</label>
-              <input
-                name='name'
-                required
-                type={'text'}
-                placeholder='username'
-                onChange={(e)=>{setName(e.target.value)}}/>
-              <label style={{color:'whitesmoke'}}>Password:</label>
-              <input
-                name='password'
-                required
-                type={'text'}
-                placeholder='password'
-                onChange={(e)=>{setPassword(e.target.value)}}/>
-              <input type={'submit'}></input>
+              <div className='formContainer'>
+                <h1 className='formContainerLabel'>Register</h1>
+                <div className='formInput'>
+                  <h3 style={{color:'whitesmoke'}}>Email:</h3>
+                  <input 
+                    name='email'
+                    required
+                    type={'text'}
+                    placeholder='Your Email'
+                    onChange={(e)=>{setEmail(e.target.value)}}/>
+                  <h3 style={{color:'whitesmoke'}}>Username:</h3>
+                  <input
+                    name='name'
+                    required
+                    type={'text'}
+                    placeholder='username'
+                    onChange={(e)=>{setName(e.target.value)}}/>
+                  <h3 style={{color:'whitesmoke'}}>Password:</h3>
+                  <input
+                    name='password'
+                    required
+                    type={'text'}
+                    placeholder='password'
+                    onChange={(e)=>{setPassword(e.target.value)}}/>
+                  <button className='btn'>Register</button>
+                </div>
+              </div>
             </form>
         </div>
     </>

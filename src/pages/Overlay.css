@@ -20,10 +20,15 @@
 
 .overlayLogo {
     display: flex;
-    font-size: 32px;
+    /* font-size: 32px; */
     padding: 15px;
     margin-left: 2.5vw;
     color: whitesmoke;
+    cursor: pointer;
+}
+
+.overlayLogo span{
+    font-size: 32px;
 }
 
 .DropdownMenuLogo {

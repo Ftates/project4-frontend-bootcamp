@@ -12,7 +12,7 @@ import './Overlay.css'
 import { useAuth } from '../AuthContext/AuthContext';
 
 
-export const Overlay = () => {
+export const Overlay = (props) => {
 
   const {header, isAuth, loggedUser, setAuthState} = useAuth()
   
@@ -36,8 +36,8 @@ export const Overlay = () => {
   return (
     <>
       <header className='overlayBanner'>
-          <div className='overlayLogo'>
-            KoinFu
+          <div className='overlayLogo' onClick={()=>{navigate("/"); props.onChildEvent("toHomePageView")}}>
+            <span>KoinFu</span>
           </div>
           <div className='DropdownMenuLogo'>
             <MenuIcon onClick={()=>{setMenuOpenState(!menuOpenState)}} sx={{color:"whiteSmoke", fontSize:"32px", cursor:"pointer"}}/>
@@ -57,9 +57,9 @@ export const Overlay = () => {
               :
                 <Paper sx={{backgroundColor:"transparent", color:"white"}}>
                   <MenuList>
-                    <MenuItem onClick={()=>{navigate("/login")}}>Login</MenuItem>
+                    <MenuItem onClick={()=>{navigate("/login"); props.onChildEvent("toHomePageView")}}>Login</MenuItem>
                     <Divider sx={{backgroundColor:"white"}}/>
-                    <MenuItem onClick={()=>{navigate("/register")}}>Register</MenuItem>
+                    <MenuItem onClick={()=>{navigate("/register"); props.onChildEvent("toHomePageView")}}>Register</MenuItem>
                     {/* <Divider sx={{backgroundColor:"white"}}/>
                     <MenuItem>Logout</MenuItem> */}
                   </MenuList>
