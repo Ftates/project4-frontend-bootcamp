@@ -12,21 +12,6 @@ export const Word0 = (props) => {
     console.log("queryparams",queryParams.get('page'))
     const selectedPage = queryParams.get('page')
 
-    const [hidden, setHidden] = useState(false)
-
-    function handleWheel(event) {
-      if (event.deltaY > 0) {
-      //   console.log("Scrolling down");
-        navigate("/learnMore/word1")
-        props.onChildEvent("word1View")
-
-      } else {
-      //   console.log("Scrolling up");
-        navigate("/learnMore/word5")
-        props.onChildEvent("word5View")
-      }
-    }
-
     const [lastScrollTime, setLastScrollTime] = useState(0)
 
     const [page0hidden, setPage0hidden] = useState(selectedPage === 'page0' ? false : true)
@@ -160,19 +145,16 @@ export const Word0 = (props) => {
     }
       
 
-    //idk send data thru url or something 
-    // then give that data thru state, whichever page state is false will be shown
-    // ternary operator on usestates 
 
   return (
     <div className='WordScreen'>
         <div className='WordContainer'>
+          {/* each div is a seperate page on the coin */}
           <div key={"page0"} className={`PageContainer ${page0hidden ? "hidden" : ""}`} onWheel={(e)=>{handleWheelPage0(e)}}>
             <button onClick={()=>{props.onChildEvent("toLearnMoreView"); navigate("/learnMore")}}>Back</button>
 
             <header>Test Text word 0</header>
             <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-            {/* <button onClick={()=>{setPage0hidden(true); setPage1hidden(false); }}>scroll down</button> */}
           </div>
 
           <div key={"page1"} className={`PageContainer ${page1hidden ? "hidden" : ""}`} onWheel={(e)=>{handleWheelPage1(e)}}>
@@ -180,7 +162,6 @@ export const Word0 = (props) => {
 
             <header>Test Text word 1</header>
             <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-            <button onClick={()=>{setPage1hidden(true); setPage2hidden(false); }}>scroll down</button>
           </div>
 
           <div key={"page2"} className={`PageContainer ${page2hidden ? "hidden" : ""}`} onWheel={(e)=>{handleWheelPage2(e)}}>
@@ -188,7 +169,6 @@ export const Word0 = (props) => {
 
             <header>Test Text word 2</header>
             <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-            <button onClick={()=>{setPage2hidden(true); setPage3hidden(false); }}>scroll down</button>
           </div>
 
           <div key={"page3"} className={`PageContainer ${page3hidden ? "hidden" : ""}`} onWheel={(e)=>{handleWheelPage3(e)}}>
@@ -196,7 +176,6 @@ export const Word0 = (props) => {
 
             <header>Test Text word 3</header>
             <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-            <button onClick={()=>{setPage3hidden(true); setPage4hidden(false); }}>scroll down</button>
           </div>
 
           <div key={"page4"} className={`PageContainer ${page4hidden ? "hidden" : ""}`} onWheel={(e)=>{handleWheelPage4(e)}}>
@@ -204,7 +183,6 @@ export const Word0 = (props) => {
 
             <header>Test Text word 4</header>
             <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-            <button onClick={()=>{setPage4hidden(true); setPage5hidden(false); }}>scroll down</button>
           </div>
 
           <div key={"page5"} className={`PageContainer ${page5hidden ? "hidden" : ""}`} onWheel={(e)=>{handleWheelPage5(e)}}>
@@ -212,7 +190,6 @@ export const Word0 = (props) => {
 
             <header>Test Text word 5</header>
             <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-            <button onClick={()=>{setPage5hidden(true); setPage0hidden(false);}}>scroll down</button>
           </div>
         </div>
     </div>

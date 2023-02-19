@@ -11,11 +11,6 @@ import { MainPageCanvas } from "./Threejs/MainPageCanvas";
 import { Overlay } from "./pages/Overlay";
 import { LearnMore } from "./pages/Home/LearnMore";
 import { Word0 } from "./pages/Home/Word0";
-import { Word1 } from "./pages/Home/Word1";
-import { Word2 } from "./pages/Home/Word2";
-import { Word3 } from "./pages/Home/Word3";
-import { Word4 } from "./pages/Home/Word4";
-import { Word5 } from "./pages/Home/Word5";
 import Login from "./pages/Login/Login";
 import { Register } from "./pages/Register/Register";
 
@@ -91,11 +86,6 @@ root.render(
             <Route path="/" element={<App onChildEvent={(e)=>handleAnimationEvent(e)}/>} />
             <Route path="/learnMore" element={<LearnMore onChildEvent={retrieveNavigateEvent}/>}>
               <Route path="/learnMore/word0" element={<Word0 onChildEvent={(e)=>handleAnimationEvent(e)}/>}/>
-              <Route path="/learnMore/word1" element={<Word1 onChildEvent={(e)=>handleAnimationEvent(e)}/>}/>
-              <Route path="/learnMore/word2" element={<Word2 onChildEvent={(e)=>handleAnimationEvent(e)}/>}/>
-              <Route path="/learnMore/word3" element={<Word3 onChildEvent={(e)=>handleAnimationEvent(e)}/>}/>
-              <Route path="/learnMore/word4" element={<Word4 onChildEvent={(e)=>handleAnimationEvent(e)}/>}/>
-              <Route path="/learnMore/word5" element={<Word5 onChildEvent={(e)=>handleAnimationEvent(e)}/>}/>
             </Route>
             <Route path="/login" element={<Login/>}/>
             <Route path="/register" element={<Register/>}/>
