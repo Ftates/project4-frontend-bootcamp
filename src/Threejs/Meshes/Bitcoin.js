@@ -36,7 +36,9 @@ export const Bitcoin = (props) => {
     const word5Ref = useRef()
     cameraRef.current = camera
 
-    
+    //debouncing to prevent multiple animations being called 
+    // let lastScrollTime = 0;
+    const [lastScrollTime, setLastScrollTime] = useState(0)
 
     // console.log("camera",cameraRef.current)
 
@@ -124,6 +126,9 @@ export const Bitcoin = (props) => {
     },[])
 
     const animateMeshToScrollView = () => {
+      const now = new Date().getTime();
+      const timeSinceLastScroll = now - lastScrollTime;
+      if (timeSinceLastScroll > 1000) {
         console.log("animating...")
         setCameraScene("scrollScene")
         // console.log(camera,gl,meshRef)
@@ -159,117 +164,144 @@ export const Bitcoin = (props) => {
             y:0.6759792125033134,
             z:0.180344788516577,
           },'start')
+          setLastScrollTime(now)
+        }
       }
 
       const animateMeshToScrollView1 = () => {
-        console.log("animating...")
-        setCameraScene("scrollScene")
+        const now = new Date().getTime();
+        const timeSinceLastScroll = now - lastScrollTime;
+        if (timeSinceLastScroll > 1000) {
+          console.log("animating...")
+          setCameraScene("scrollScene")
 
-        const timeline = gsap.timeline()
-        timeline
-          .add('start')
-          .to(cameraRef.current.position, {
-            duration: 1,
-            x: 1.1080830959744983,
-            y: 0.1477029659568294,
-            z: 0.07526258574842828,
-          },'start')
-          .to(cameraRef.current.quaternion, {
-            duration: 1,
-            w:0.7038118042296084,
-            x:-0.04156319863245632,
-            y:0.7079361831720004,
-            z:0.04180676144312243,
-          },'start')
+          const timeline = gsap.timeline()
+          timeline
+            .add('start')
+            .to(cameraRef.current.position, {
+              duration: 1,
+              x: 1.1080830959744983,
+              y: 0.1477029659568294,
+              z: 0.07526258574842828,
+            },'start')
+            .to(cameraRef.current.quaternion, {
+              duration: 1,
+              w:0.7038118042296084,
+              x:-0.04156319863245632,
+              y:0.7079361831720004,
+              z:0.04180676144312243,
+            },'start')
+            setLastScrollTime(now)
+        }
       }
 
       const animateMeshToScrollView2 = () => {
-        console.log("animating...")
-        setCameraScene("scrollScene")
+        const now = new Date().getTime();
+        const timeSinceLastScroll = now - lastScrollTime;
+        if (timeSinceLastScroll > 1000) {
+          console.log("animating...")
+          setCameraScene("scrollScene")
 
-        const timeline = gsap.timeline()
-        timeline
-          .add('start')
-          .to(cameraRef.current.position, {
-            duration: 1,
-            x: 1.0631727166659983,
-            y: -0.3861901856289226,
-            z: 0.09675058717801176,
-          },'start')
-          .to(cameraRef.current.quaternion, {
-            duration: 1,
-            w:0.6958206550344738,
-            x:0.14355926990562098,
-            y:0.6892061039740096,
-            z:-0.1421945789983833,
-          },'start')
-      }
-
-      const animateMeshToScrollView3 = () => {
-        console.log("animating...")
-        setCameraScene("scrollScene")
-
-        const timeline = gsap.timeline()
-        timeline
-          .add('start')
-          .to(cameraRef.current.position, {
-            duration: 1,
-            x: -0.9664162888004877,
-            y: 0.550278690416551,
-            z: -0.17696863394040857,
-          },'start')
-          .to(cameraRef.current.quaternion, {
-            duration: 1,
-            w:0.6700598339067778,
-            x:-0.1718217360928268,
-            y:-0.6995153609652341,
-            z:-0.17937494185238492,
-          },'start')
-      }
-
-      const animateMeshToScrollView4 = () => {
-        console.log("animating...")
-        setCameraScene("scrollScene")
-
-        const timeline = gsap.timeline()
-        timeline
-          .add('start')
-          .to(cameraRef.current.position, {
-            duration: 1,
-            x: -1.1095245345172353,
-            y: 0.08680003730357905,
-            z: -0.1824764383927543,
-          },'start')
-          .to(cameraRef.current.quaternion, {
-            duration: 1,
-            w:0.6888704081664222,
-            x:-0.024397930252045005,
-            y:-0.7240198526896616,
-            z:-0.025642828691155976,
-          },'start')
+          const timeline = gsap.timeline()
+          timeline
+            .add('start')
+            .to(cameraRef.current.position, {
+              duration: 1,
+              x: 1.0631727166659983,
+              y: -0.3861901856289226,
+              z: 0.09675058717801176,
+            },'start')
+            .to(cameraRef.current.quaternion, {
+              duration: 1,
+              w:0.6958206550344738,
+              x:0.14355926990562098,
+              y:0.6892061039740096,
+              z:-0.1421945789983833,
+            },'start')
+            setLastScrollTime(now)
+        }
       }
 
       const animateMeshToScrollView5 = () => {
-        console.log("animating...")
-        setCameraScene("scrollScene")
+        const now = new Date().getTime();
+        const timeSinceLastScroll = now - lastScrollTime;
+        if (timeSinceLastScroll > 1000) {
+          console.log("animating...")
+          setCameraScene("scrollScene")
 
-        const timeline = gsap.timeline()
-        timeline
-          .add('start')
-          .to(cameraRef.current.position, {
-            duration: 1,
-            x: -0.9879402984275973,
-            y: -0.5224404720306913,
-            z: -0.194520693544385,
-          },'start')
-          .to(cameraRef.current.quaternion, {
-            duration: 1,
-            w:0.6567780230555558,
-            x:0.18078685306075581,
-            y:-0.7058395576792638,
-            z:0.19429169052423656,
-          },'start')
+          const timeline = gsap.timeline()
+          timeline
+            .add('start')
+            .to(cameraRef.current.position, {
+              duration: 1,
+              x: -0.9664162888004877,
+              y: 0.550278690416551,
+              z: -0.17696863394040857,
+            },'start')
+            .to(cameraRef.current.quaternion, {
+              duration: 1,
+              w:0.6700598339067778,
+              x:-0.1718217360928268,
+              y:-0.6995153609652341,
+              z:-0.17937494185238492,
+            },'start')
+            setLastScrollTime(now)
+        }
       }
+
+      const animateMeshToScrollView4 = () => {
+        const now = new Date().getTime();
+        const timeSinceLastScroll = now - lastScrollTime;
+        if (timeSinceLastScroll > 1000) {
+          console.log("animating...")
+          setCameraScene("scrollScene")
+
+          const timeline = gsap.timeline()
+          timeline
+            .add('start')
+            .to(cameraRef.current.position, {
+              duration: 1,
+              x: -1.1095245345172353,
+              y: 0.08680003730357905,
+              z: -0.1824764383927543,
+            },'start')
+            .to(cameraRef.current.quaternion, {
+              duration: 1,
+              w:0.6888704081664222,
+              x:-0.024397930252045005,
+              y:-0.7240198526896616,
+              z:-0.025642828691155976,
+            },'start')
+            setLastScrollTime(now)
+        }
+      }
+
+      const animateMeshToScrollView3 = () => {
+        const now = new Date().getTime();
+        const timeSinceLastScroll = now - lastScrollTime;
+        if (timeSinceLastScroll > 1000) {
+          console.log("animating...")
+          setCameraScene("scrollScene")
+          const timeline = gsap.timeline()
+          timeline
+            .add('start')
+            .to(cameraRef.current.position, {
+              duration: 1,
+              x: -0.9879402984275973,
+              y: -0.5224404720306913,
+              z: -0.194520693544385,
+            },'start')
+            .to(cameraRef.current.quaternion, {
+              duration: 1,
+              w:0.6567780230555558,
+              x:0.18078685306075581,
+              y:-0.7058395576792638,
+              z:0.19429169052423656,
+            },'start')
+            setLastScrollTime(now)
+        }
+      }
+      
 
       const animateMeshView1 = () => {
         console.log("changing to view 1...")
@@ -281,77 +313,88 @@ export const Bitcoin = (props) => {
     
 
       const animateMeshToLearnMoreView = () => {
-        console.log("changing to start view...")
-        setCameraScene("learnMoreScene")
-        const timeline = new gsap.timeline()
-        timeline
-            .add('start')
-            .to(cameraRef.current.position, {
-              duration: 1,
-              x: -0.14008239257964344,
-              y: -0.37301634680916906,
-              z: 1.479752837735031,
-            }, 'start')
-            .to(cameraRef.current.quaternion, {
-              duration: 1,
-              w: 0.9766088138071856,
-              x: 0.09219955892151643,
-              y: -0.19339368071350138,
-              z: 0.01825788566302432,
-              // onComplete: ()=>{setCameraScene("learnMoreScene")}
+        const now = new Date().getTime();
+        const timeSinceLastScroll = now - lastScrollTime;
+        if (timeSinceLastScroll > 1000) {
+          console.log("changing to start view...")
+          setCameraScene("learnMoreScene")
+          const timeline = new gsap.timeline()
+          timeline
+              .add('start')
+              .to(cameraRef.current.position, {
+                duration: 1,
+                x: -0.14008239257964344,
+                y: -0.37301634680916906,
+                z: 1.479752837735031,
+              }, 'start')
+              .to(cameraRef.current.quaternion, {
+                duration: 1,
+                w: 0.9766088138071856,
+                x: 0.09219955892151643,
+                y: -0.19339368071350138,
+                z: 0.01825788566302432,
+                // onComplete: ()=>{setCameraScene("learnMoreScene")}
 
-            }, 'start')
+              }, 'start')
+              setLastScrollTime(now)
+          }
       }
 
       const animateMeshToLearnMoreView2 = () => {
-        console.log("changing to start view2...")
-        setCameraScene("learnMoreScene2")
-        const timeline = new gsap.timeline({smoothChildTiming:true})
-        timeline
-            // .add('start')
-            // .add('secondposition',)
-            .add('endposition',)
-            // animations are not smooth, removed for now cause it looks better without it
-            // .to(cameraRef.current.position, {
-            //   duration: 1,
-            //   x: 1.7177533232652777,
-            //   y: 0.6030475959133379,
-            //   z: 0.510861201557612,
-            // }, 'start')
-            // .to(cameraRef.current.quaternion, {
-            //   duration: 1,
-            //   w: 0.8139703818842957,
-            //   x: -0.22340206115010208,
-            //   y: 0.5171082348744372,
-            //   z: 0.14192536740859166,
-            // }, 'start')
-            // .to(cameraRef.current.position, {
-            //   duration: 1,
-            //   x: 1.2764257996893764,
-            //   y: 0.39814719524571446,
-            //   z: -0.974748688533769,
-            // }, 'secondposition')
-            // .to(cameraRef.current.quaternion, {
-            //   duration: 1,
-            //   w: 0.44005833457048005,
-            //   x: -0.053732977713798646,
-            //   y: 0.8897517904258531,
-            //   z: 0.1086424443532672,
-            // }, 'secondposition')
-            .to(cameraRef.current.position, {
-              duration: 1,
-              x: 0.14737095320057114,
-              y: -0.1994738581061015,
-              z: -1.6359735450259043,
-            }, 'endposition')
-            .to(cameraRef.current.quaternion, {
-              duration: 1,
-              w: 0.21117211035158662,
-              x: 0.01174496152409791,
-              y: 0.9758701357911753,
-              z: -0.05427590404007838,
-              // onComplete: ()=>{setCameraScene("learnMoreScene2")}
-            }, 'endposition')
+        //debouncing to prevent multiple scrolls from people who just want to see the world burn
+        const now = new Date().getTime();
+        const timeSinceLastScroll = now - lastScrollTime;
+        if (timeSinceLastScroll > 1000) {
+          console.log("changing to start view2...")
+          setCameraScene("learnMoreScene2")
+          const timeline = new gsap.timeline({smoothChildTiming:true})
+          timeline
+              // .add('start')
+              // .add('secondposition',)
+              .add('endposition',)
+              // animations are not smooth, removed for now cause it looks better without it
+              // .to(cameraRef.current.position, {
+              //   duration: 1,
+              //   x: 1.7177533232652777,
+              //   y: 0.6030475959133379,
+              //   z: 0.510861201557612,
+              // }, 'start')
+              // .to(cameraRef.current.quaternion, {
+              //   duration: 1,
+              //   w: 0.8139703818842957,
+              //   x: -0.22340206115010208,
+              //   y: 0.5171082348744372,
+              //   z: 0.14192536740859166,
+              // }, 'start')
+              // .to(cameraRef.current.position, {
+              //   duration: 1,
+              //   x: 1.2764257996893764,
+              //   y: 0.39814719524571446,
+              //   z: -0.974748688533769,
+              // }, 'secondposition')
+              // .to(cameraRef.current.quaternion, {
+              //   duration: 1,
+              //   w: 0.44005833457048005,
+              //   x: -0.053732977713798646,
+              //   y: 0.8897517904258531,
+              //   z: 0.1086424443532672,
+              // }, 'secondposition')
+              .to(cameraRef.current.position, {
+                duration: 1,
+                x: 0.14737095320057114,
+                y: -0.1994738581061015,
+                z: -1.6359735450259043,
+              }, 'endposition')
+              .to(cameraRef.current.quaternion, {
+                duration: 1,
+                w: 0.21117211035158662,
+                x: 0.01174496152409791,
+                y: 0.9758701357911753,
+                z: -0.05427590404007838,
+                // onComplete: ()=>{setCameraScene("learnMoreScene2")}
+              }, 'endposition')
+            setLastScrollTime(now)
+          }
       }
 
 

@@ -20,3 +20,18 @@
     width: 50px;
     margin-bottom: 10px;
 }
+
+.PageContainer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 1;
+    transition: transform 0.5s ease-out, opacity 0.5s ease-out;
+}
+  
+.PageContainer.hidden {
+    transform: translateX(-100%);
+    opacity: 0;
+}
