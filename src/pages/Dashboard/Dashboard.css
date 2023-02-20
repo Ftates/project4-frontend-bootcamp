@@ -21,3 +21,7 @@
 .Screen .header {
   border: 1px solid black;
 }
+
+.growthChart {
+  display: flex;
+}
