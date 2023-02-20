@@ -36,8 +36,8 @@ export default function Dashboard() {
   }
 
   useEffect(() => {
-    getTxnData();
-    getWalletData();
+    // getTxnData();
+    // getWalletData();
   }, []);
 
   useEffect(() => {
@@ -55,7 +55,7 @@ export default function Dashboard() {
       </div>
 
       <span className="header">Dashboard</span>
-      <BarChart />
+      {/* <BarChart /> */}
     </div>
   );
 }
