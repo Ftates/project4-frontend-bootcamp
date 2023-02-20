@@ -44,6 +44,7 @@ const retrieveToggleDisplay = (func) => {
 const handleAnimationEvent = (route) => {
   // console.log("alivent check")
   if(route === "toHomePageView")animationMap.animateMeshtoHomePageView()
+  if(route === "toDashboardPageView")animationMap.animateMeshtoDashboardPageView()
   if(route === "toLearnMoreView")animationMap.animateMeshToLearnMoreView()
   if(route === "toLearnMoreView2")animationMap.animateMeshToLearnMoreView2()
   if(route === "word0View")animationMap.animateMeshToScrollView()

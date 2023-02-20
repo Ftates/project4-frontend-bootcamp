@@ -45,11 +45,11 @@ export const Overlay = (props) => {
               {isAuth ? 
                 <Paper sx={{backgroundColor:"transparent", color:"white"}}>
                   <MenuList>
-                    <MenuItem onClick={()=>{}}>Profile</MenuItem>
+                    <MenuItem onClick={()=>{props.onChildEvent("toDashboardPageView")}}>Profile</MenuItem>
                     <Divider sx={{backgroundColor:"white"}}/>
-                    <MenuItem onClick={()=>{}}>Dashboard</MenuItem>
+                    <MenuItem onClick={()=>{props.onChildEvent("toDashboardPageView")}}>Dashboard</MenuItem>
                     <Divider sx={{backgroundColor:"white"}}/>
-                    <MenuItem onClick={()=>{}}>Charts</MenuItem>
+                    <MenuItem onClick={()=>{props.onChildEvent("toDashboardPageView")}}>Charts</MenuItem>
                     <Divider sx={{backgroundColor:"white"}}/>
                     <MenuItem onClick={()=>{handleLogout()}}>Logout</MenuItem>
                   </MenuList>

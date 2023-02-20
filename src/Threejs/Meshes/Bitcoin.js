@@ -3,9 +3,10 @@ import { OrbitControls } from '@react-three/drei'
 import React, { useEffect, useRef, useState } from 'react'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 import gsap from 'gsap'
-import { BoxGeometry, Object3D } from 'three'
+import { BoxGeometry, MeshBasicMaterial, MeshPhongMaterial, Object3D } from 'three'
 import bitcoinglb from '../Resources/Bitcoin.glb'
 import coinwordsglb from '../Resources/Coinwords.glb'
+import dashboardglb from '../Resources/CoinDashboard.glb'
 
 
 export const Bitcoin = (props) => {
@@ -27,6 +28,7 @@ export const Bitcoin = (props) => {
     const cameraRef = useRef()
     const meshRef = useRef()
     const wordsRef = useRef()
+    const backgroundRef = useRef()
 
     const word0Ref = useRef()
     const word1Ref = useRef()
@@ -36,11 +38,19 @@ export const Bitcoin = (props) => {
     const word5Ref = useRef()
     cameraRef.current = camera
 
+    const material = new MeshPhongMaterial({
+      color: 0x22A39F, // set the color of the material
+      transparent: false, // make the material opaque
+      lightMapIntensity: 0,
+      reflectivity: 0,
+      refractionRatio: 0,
+    });
+
     //debouncing to prevent multiple animations being called 
     // let lastScrollTime = 0;
     const [lastScrollTime, setLastScrollTime] = useState(0)
 
-    // console.log("camera",cameraRef.current)
+    console.log("camera",cameraRef.current)
 
     useEffect(()=>{
       cameraRef.current.position.z = 4.5
@@ -119,6 +129,21 @@ export const Bitcoin = (props) => {
           // called on error
           (error) => {
             console.log("an error has occured:", error)
+          }
+        )
+
+        glbLoader.load(
+          dashboardglb,
+          (obj) => {
+            const mesh = new Object3D()
+            mesh.add(obj.scene)
+            backgroundRef.current.add(mesh)
+          },
+          (xhr) => {
+
+          },
+          (error) => {
+            console.log(error)
           }
         )
 
@@ -397,15 +422,6 @@ export const Bitcoin = (props) => {
           }
       }
 
-
-      const animateMeshToLearnMoreViewFromView2 = () => {
-        console.log("changing to start view from view 2...")
-        setCameraScene("learnMoreScene")
-        const timeline = new gsap.timeline()
-        timeline
-            .add('start')
-      }
-
       const animateMeshtoHomePageView = () => {
         setCameraScene("welcomeScene")
         const timeline = new gsap.timeline()
@@ -424,6 +440,26 @@ export const Bitcoin = (props) => {
               y: 0,
               z: 0,
             }, 'start')
+      }
+
+      const animateMeshtoDashboardPageView = () => {
+        setCameraScene("dashboardScene")
+        const timeline = new gsap.timeline()
+        timeline
+          .add('start')
+          .to(cameraRef.current.position, {
+            duration: 0.75,
+            x: 0,
+            y: 0,
+            z: 5.2,
+          }, 'start')
+          .to(cameraRef.current.quaternion, {
+            duration: 0.75,
+            w:1,
+            x:0,
+            y:0,
+            z:0,
+          }, 'start')
       }
 
 
@@ -447,6 +483,12 @@ export const Bitcoin = (props) => {
           cameraRef.current.position.x = 0 + (mouse[0] - window.innerWidth / 2) * 0.0004/2
           cameraRef.current.position.y = 0 + (mouse[1] - window.innerHeight / 2) * 0.0004
         }
+
+        if(cameraScene === "dashboardScene"){
+          cameraRef.current.rotation.x = 0 + (mouse[1] - window.innerWidth / 2) * 0.0005
+          cameraRef.current.rotation.y = 0 + (mouse[0] - window.innerHeight / 2) * 0.0005/2
+        }
+        
 
         // broken code, camera does not like it when two things try to control it at the same time (will fix if have time)
         // if(cameraScene === "learnMoreScene"){
@@ -481,6 +523,7 @@ export const Bitcoin = (props) => {
         animateMeshToScrollView4:animateMeshToScrollView4,
         animateMeshToScrollView5:animateMeshToScrollView5,
         animateMeshtoHomePageView:animateMeshtoHomePageView,
+        animateMeshtoDashboardPageView:animateMeshtoDashboardPageView,
       }
 
       // exporting all animation function to top level to be called by other components
@@ -568,6 +611,14 @@ export const Bitcoin = (props) => {
 
     >
       
+    </mesh>
+
+    <mesh
+    {...props}
+    ref={backgroundRef}
+    material={material}
+    >
+
     </mesh>
 
     {/* <OrbitControls/> */}

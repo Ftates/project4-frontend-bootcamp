@@ -35,3 +35,10 @@
     transform: translateX(-100%);
     opacity: 0;
 }
+
+.PageContainer button{
+    text-decoration: none;
+    font-size: larger;
+    background: none;
+    border: none;
+}
