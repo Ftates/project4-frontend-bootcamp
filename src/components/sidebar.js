@@ -7,7 +7,7 @@ import "./sidebar.css";
 export default function Sidebar() {
   return (
     <div className="sidebar">
-      <body className="nav">
+      <div className="nav">
         <ul>
           <li>
             <Link to="/dashboard">
@@ -34,7 +34,7 @@ export default function Sidebar() {
             </Link>
           </li>
         </ul>
-      </body>
+      </div>
     </div>
   );
 }
