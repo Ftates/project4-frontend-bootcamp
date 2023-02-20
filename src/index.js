@@ -19,6 +19,7 @@ import { Word5 } from "./pages/Home/Word5";
 import Login from "./pages/Login/Login";
 import { Register } from "./pages/Register/Register";
 import Dashboard from "./pages/Dashboard/Dashboard";
+import Transactions from "./pages/Transaction Log/Transaction.js";
 
 // console.log("authprovider",AuthProvider)
 
@@ -145,6 +146,7 @@ root.render(
             <Route path="/register" element={<Register />} />
           </Route> */}
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/transactions" element={<Transactions />} />
         </Routes>
       </AuthProvider>
     </BrowserRouter>

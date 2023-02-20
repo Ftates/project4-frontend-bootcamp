@@ -5,6 +5,7 @@ import "./Dashboard.css";
 import Sidebar from "../../components/sidebar";
 import BarChart from "../../components/BarChart";
 import LineChart from "../../components/LineChart";
+import DoughnutChart from "../../components/Doughnut";
 
 export default function Dashboard() {
   const [txnData, setTxnData] = useState([]);
@@ -94,10 +95,15 @@ export default function Dashboard() {
 
   return (
     <div className="Screen">
+      <span>Dashboard</span>
       <div className="dashboard">
-        <div className="growthChart">
-          <LineChart chartData={userData} />
-          <LineChart chartData={userData} />
+        <div className="header">
+          <div className="item1">
+            <LineChart chartData={userData} />
+          </div>
+          <div className="item2">
+            <DoughnutChart />
+          </div>
         </div>
         <div className="overview">
           <LineChart chartData={userData} />
