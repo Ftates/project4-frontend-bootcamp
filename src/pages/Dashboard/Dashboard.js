@@ -7,16 +7,15 @@ import './Dashboard.css'
 export const Dashboard = () => {
 
   const navigate = useNavigate()
-  const { isAuth } = useAuth
+  const { isAuth } = useAuth()
 
 
 
   useEffect(()=>{
-    console.log("isauth",isAuth)
     if(isAuth!==true){
       navigate("/")
     }
-  },[])
+  },[isAuth])
 
   return (
     <>

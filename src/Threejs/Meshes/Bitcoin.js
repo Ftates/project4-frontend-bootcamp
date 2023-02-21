@@ -80,7 +80,6 @@ export const Bitcoin = (props) => {
         glbLoader.load(
           coinwordsglb,
           (obj) => {
-            console.log("load obj words,",obj)
 
             //testing
             // const mesh = new Object3D()
@@ -107,13 +106,6 @@ export const Bitcoin = (props) => {
             mesh4.add(obj.scene.children[0])
             mesh5.add(obj.scene.children[0])
 
-            console.log("0",word0Ref)
-            console.log("1",word1Ref)
-            console.log("2",word2Ref)
-            console.log("3",word3Ref)
-            console.log("4",word4Ref)
-            console.log("5",word5Ref)
-
             word0Ref.current.add(mesh0)
             word1Ref.current.add(mesh1)
             word2Ref.current.add(mesh2)
@@ -121,10 +113,9 @@ export const Bitcoin = (props) => {
             word4Ref.current.add(mesh4)
             word5Ref.current.add(mesh5)
 
-            console.log("balls")
           },
           (xhr) => {
-            console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
+            // console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
           },
           // called on error
           (error) => {

@@ -31,7 +31,7 @@ export const Overlay = (props) => {
       token: "",
       })
     navigate("/")
-    props.onChildEvent("toDashboardPageView")
+    props.onChildEvent("toHomePageView")
   }
 
   return (
