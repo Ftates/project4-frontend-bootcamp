@@ -2,9 +2,11 @@ import React, { useState } from "react";
 import './Login.css'
 import userLogin from "../../API_Services/userLogin";
 import { useAuth } from "../../AuthContext/AuthContext";
+import { useNavigate } from "react-router-dom";
 
-export default function Login() {
+export default function Login(props) {
 
+  const navigate = useNavigate()
   const [email, setEmail] = useState()
   const [password, setPassword] = useState()
   const [errorMessage, setErrorMessage] = useState("")
@@ -16,6 +18,10 @@ export default function Login() {
     // api call to login
     userLogin(email,password)
       .then(setAuthState)
+      .then(()=>{
+        navigate("/dashboard")
+        props.onChildEvent("toDashboardPageView")
+      })
   }
 
   

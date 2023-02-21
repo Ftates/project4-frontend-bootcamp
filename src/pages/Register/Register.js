@@ -1,9 +1,11 @@
 import React, { createContext, useContext, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import userRegister from '../../API_Services/userRegister.js'
 import { useAuth } from '../../AuthContext/AuthContext.js'
 
-export const Register = () => {
+export const Register = (props) => {
 
+  const navigate = useNavigate()
   const [name, setName] = useState()
   const [email, setEmail] = useState()
   const [password, setPassword] = useState()
@@ -24,6 +26,10 @@ export const Register = () => {
     userRegister(name, email, password)
     //userRegister must return an object that can be passed into setAuthState in the correct format so it can destucture properly and not die
       .then(setAuthState)
+      .then(()=>{
+        navigate("/dashboard")
+        props.onChildEvent("toDashboardPageView")
+      })
       .then(console.log("done"))
       .catch((err)=>{console.log("WORLD CLASS CATCH!",err)})
   }

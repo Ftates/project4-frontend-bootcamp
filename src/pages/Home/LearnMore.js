@@ -8,22 +8,22 @@ export const LearnMore = (props) => {
   let funcMapNavigate = {}
 
   const onWord0Click = () => {
-    navigate("/learnMore/word0")
+    navigate("/learnMore/word0?page=page0")
   }
   const onWord1Click = () => {
-    navigate("/learnMore/word1")
+    navigate("/learnMore/word0?page=page1")
   }
   const onWord2Click = () => {
-    navigate("/learnMore/word2")
+    navigate("/learnMore/word0?page=page2")
   }
   const onWord3Click = () => {
-    navigate("/learnMore/word3")
+    navigate("/learnMore/word0?page=page3")
   }
   const onWord4Click = () => {
-    navigate("/learnMore/word4")
+    navigate("/learnMore/word0?page=page4")
   }
   const onWord5Click = () => {
-    navigate("/learnMore/word5")
+    navigate("/learnMore/word0?page=page5")
   }
 
   funcMapNavigate = {

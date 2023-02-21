@@ -7,8 +7,6 @@ async function getUser({ headers }) {
       headers,
       url: "http://localhost:3001/users/test",
     });
-    console.log("ALIVE CHECKKKKKKK")
-    console.log("data",data)
     if(data.success === false){
       throw(data)
     }

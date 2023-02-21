@@ -28,6 +28,7 @@ export const MainPageCanvas = (props) => {
       <pointLight color={"grey"} intensity={5} position={[5, 5, -5]} />
       <pointLight color={"grey"} intensity={1} position={[0, 0, 0]} />
       <Bitcoin position={[0,0,0]} onChildEvent={props.onChildEvent} callNavigate={props.callNavigate}/>
+      <pointLight color={"grey"} intensity={1} position={[0, 0, 10]}/>
       {/* <OrbitControls/> */}
     
 

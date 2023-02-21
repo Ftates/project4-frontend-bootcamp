@@ -18,7 +18,6 @@ const userLogin = async (email, password) => {
         const { user } = data;
         const headers = { Authorization: `Token ${user.token}` };
     
-
         delete user.password
         const loggedIn = { headers, isAuth: true, loggedUser: user , username: user.username};
     
