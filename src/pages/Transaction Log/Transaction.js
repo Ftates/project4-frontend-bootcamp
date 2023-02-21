@@ -2,6 +2,7 @@ import React from "react";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import "./Transaction.css";
+import findIdByName from "../../helpers/findIdbyName";
 
 import TransactionTable from "../../components/TransactionTable";
 import Button from "@mui/material/Button";
@@ -23,7 +24,7 @@ import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 
 export default function Transactions() {
   const [open, setOpen] = useState(false);
-  const [date, setDate] = useState();
+  const [date, setDate] = useState("");
   const [wallet, setWallet] = useState("");
   const [coin, setCoin] = useState("");
   const [type, setType] = useState("");
@@ -69,9 +70,13 @@ export default function Transactions() {
     }
   };
 
-  const handleSubmitForm = (e) => {
+  const handleSubmitForm = async (e) => {
     if (date && wallet && coin && type && quantity && price) {
+      const wallet_id = findIdByName(wallet, userWallets);
+
       setNewTxn({
+        user_id: 1,
+        wallet_id: wallet_id,
         date: date,
         wallet: wallet,
         coin: coin,
@@ -79,7 +84,7 @@ export default function Transactions() {
         quantity: quantity,
         price: price,
       });
-      setOpen(false);
+
       setWallet("");
       setCoin("");
       setType("");
@@ -88,7 +93,18 @@ export default function Transactions() {
     } else {
       console.log("Error");
     }
+    console.log(newTxn);
+    const addTxn = await axios.post(
+      "http://localhost:3001/transactions/addTransaction",
+      newTxn
+    );
+
+    setOpen(false);
   };
+
+  useEffect(() => {
+    console.log(newTxn);
+  }, [newTxn]);
 
   return (
     <div className="Screen">
@@ -108,8 +124,8 @@ export default function Transactions() {
                     label="Date"
                     value={date}
                     onChange={(newValue) => {
-                      console.log(newValue);
-                      setDate(newValue._d);
+                      const newdate = newValue.format("YYYY-MM-DD");
+                      setDate(newdate);
                     }}
                     renderInput={(params) => <TextField {...params} />}
                   />
