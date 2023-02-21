@@ -13,7 +13,7 @@ import { LearnMore } from "./pages/Home/LearnMore";
 import { Word0 } from "./pages/Home/Word0";
 import Login from "./pages/Login/Login";
 import { Register } from "./pages/Register/Register";
-import { Dashboard } from "./pages/Dashboard/Dashboard.js";
+import Dashboard from "./pages/Dashboard/Dashboard.js";
 import { WalletList } from "./pages/WalletList/WalletList.js";
 import Transactions from "./pages/Transaction Log/Transaction";
 
