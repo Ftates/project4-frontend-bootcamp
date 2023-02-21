@@ -31,10 +31,8 @@ const AuthProvider = ({children}) => {
 
         if (!headers) return;
         
-        console.log("headers",headers)
         getUser({ headers })
           .then((res)=>{
-            console.log("resr",res)
             if(res.success === false){
               if(res.error.name === "TokenExpiredError"){
                 setAuthState(authState)

@@ -13,6 +13,8 @@ import { LearnMore } from "./pages/Home/LearnMore";
 import { Word0 } from "./pages/Home/Word0";
 import Login from "./pages/Login/Login";
 import { Register } from "./pages/Register/Register";
+import { Dashboard } from "./pages/Dashboard/Dashboard.js";
+import { WalletList } from "./pages/WalletList/WalletList.js";
 
 // console.log("authprovider",AuthProvider)
 
@@ -84,12 +86,14 @@ root.render(
       <AuthProvider>
         <Routes>
           <Route path="/" element={<Overlay onChildEvent={(e)=>{handleAnimationEvent(e)}}/>}>
-            <Route path="/" element={<App onChildEvent={(e)=>handleAnimationEvent(e)}/>} />
+            <Route path="/" element={<App onChildEvent={(e)=>handleAnimationEvent(e)}/>}/>
             <Route path="/learnMore" element={<LearnMore onChildEvent={retrieveNavigateEvent}/>}>
               <Route path="/learnMore/word0" element={<Word0 onChildEvent={(e)=>handleAnimationEvent(e)}/>}/>
             </Route>
-            <Route path="/login" element={<Login/>}/>
-            <Route path="/register" element={<Register/>}/>
+            <Route path="/login" element={<Login onChildEvent={(e)=>handleAnimationEvent(e)}/>}/>
+            <Route path="/register" element={<Register onChildEvent={(e)=>handleAnimationEvent(e)}/>}/>
+            <Route path="/dashboard" element={<Dashboard/>}/>
+            <Route path="/walletList" element={<WalletList/>}/>
           </Route>
         </Routes>
       </AuthProvider>

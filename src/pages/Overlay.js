@@ -31,6 +31,7 @@ export const Overlay = (props) => {
       token: "",
       })
     navigate("/")
+    props.onChildEvent("toDashboardPageView")
   }
 
   return (
@@ -45,11 +46,13 @@ export const Overlay = (props) => {
               {isAuth ? 
                 <Paper sx={{backgroundColor:"transparent", color:"white"}}>
                   <MenuList>
-                    <MenuItem onClick={()=>{props.onChildEvent("toDashboardPageView")}}>Profile</MenuItem>
+                    <MenuItem onClick={()=>{navigate("/dashboard") ;props.onChildEvent("toDashboardPageView")}}>Dashboard</MenuItem>
                     <Divider sx={{backgroundColor:"white"}}/>
-                    <MenuItem onClick={()=>{props.onChildEvent("toDashboardPageView")}}>Dashboard</MenuItem>
+                    <MenuItem onClick={()=>{navigate("/walletList") ;props.onChildEvent("toDashboardPageView")}}>Wallet List</MenuItem>
                     <Divider sx={{backgroundColor:"white"}}/>
-                    <MenuItem onClick={()=>{props.onChildEvent("toDashboardPageView")}}>Charts</MenuItem>
+                    <MenuItem onClick={()=>{props.onChildEvent("toDashboardPageView")}}>Watch List</MenuItem>
+                    <Divider sx={{backgroundColor:"white"}}/>
+                    <MenuItem onClick={()=>{props.onChildEvent("toDashboardPageView")}}>Transaction Log</MenuItem>
                     <Divider sx={{backgroundColor:"white"}}/>
                     <MenuItem onClick={()=>{handleLogout()}}>Logout</MenuItem>
                   </MenuList>

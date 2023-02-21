@@ -50,7 +50,7 @@ export const Bitcoin = (props) => {
     // let lastScrollTime = 0;
     const [lastScrollTime, setLastScrollTime] = useState(0)
 
-    console.log("camera",cameraRef.current)
+    // console.log("camera",cameraRef.current)
 
     useEffect(()=>{
       cameraRef.current.position.z = 4.5
