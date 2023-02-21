@@ -26,12 +26,14 @@ export default function Transactions() {
   const [open, setOpen] = useState(false);
   const [date, setDate] = useState("");
   const [wallet, setWallet] = useState("");
+  const [wallet_id, setWalletId] = useState(0);
   const [coin, setCoin] = useState("");
   const [type, setType] = useState("");
   const [quantity, setQuantity] = useState(0);
   const [price, setPrice] = useState(0);
 
   const [newTxn, setNewTxn] = useState({});
+  const [userTxns, setUserTxns] = useState([]);
 
   const [userWallets, setUserWallets] = useState([]);
 
@@ -44,9 +46,24 @@ export default function Transactions() {
     setUserWallets(data);
   }
 
+  async function getUserTransaction() {
+    const response = await axios.get(
+      "http://localhost:3001/transaction/getAllTransactions",
+      { params: { user_id: 1 } }
+    );
+    const data = response.data;
+    console.log(data);
+    setUserTxns(data);
+  }
+
   useEffect(() => {
     getUserWallet();
+    getUserTransaction();
   }, []);
+
+  useEffect(() => {
+    console.log(userTxns);
+  }, [userTxns]);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -59,6 +76,8 @@ export default function Transactions() {
   const handleChangeForm = (e) => {
     if (e.target.name === "wallet") {
       setWallet(e.target.value);
+      const wallet_id = findIdByName(e.target.value, userWallets);
+      setWalletId(wallet_id);
     } else if (e.target.name === "coin") {
       setCoin(e.target.value);
     } else if (e.target.name === "type") {
@@ -68,32 +87,28 @@ export default function Transactions() {
     } else if (e.target.name === "price") {
       setPrice(e.target.value);
     }
+
+    setNewTxn({
+      user_id: 1,
+      wallet_id: wallet_id,
+      date: date,
+      wallet: wallet,
+      coin: coin,
+      type: type,
+      quantity: quantity,
+      price: price,
+    });
   };
+
+  useEffect(() => {
+    console.log(newTxn);
+  }, [newTxn]);
 
   const handleSubmitForm = async (e) => {
     if (date && wallet && coin && type && quantity && price) {
-      const wallet_id = findIdByName(wallet, userWallets);
-
-      setNewTxn({
-        user_id: 1,
-        wallet_id: wallet_id,
-        date: date,
-        wallet: wallet,
-        coin: coin,
-        type: type,
-        quantity: quantity,
-        price: price,
-      });
-
-      setWallet("");
-      setCoin("");
-      setType("");
-      setQuantity(0);
-      setPrice(0);
-    } else {
-      console.log("Error");
+      console.log(newTxn);
     }
-    console.log(newTxn);
+
     const addTxn = await axios.post(
       "http://localhost:3001/transactions/addTransaction",
       newTxn
@@ -101,10 +116,6 @@ export default function Transactions() {
 
     setOpen(false);
   };
-
-  useEffect(() => {
-    console.log(newTxn);
-  }, [newTxn]);
 
   return (
     <div className="Screen">
