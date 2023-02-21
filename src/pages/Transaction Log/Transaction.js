@@ -37,6 +37,8 @@ export default function Transactions() {
 
   const [userWallets, setUserWallets] = useState([]);
 
+  const [event, setEvent] = useState(true);
+
   async function getUserWallet() {
     const response = await axios.get(
       "http://localhost:3001/wallets/getAllWallets",
@@ -48,22 +50,16 @@ export default function Transactions() {
 
   async function getUserTransaction() {
     const response = await axios.get(
-      "http://localhost:3001/transaction/getAllTransactions",
+      "http://localhost:3001/transactions/getAllTransactions",
       { params: { user_id: 1 } }
     );
-    const data = response.data;
-    console.log(data);
-    setUserTxns(data);
+    setUserTxns(response.data.data);
   }
 
   useEffect(() => {
     getUserWallet();
     getUserTransaction();
   }, []);
-
-  useEffect(() => {
-    console.log(userTxns);
-  }, [userTxns]);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -232,7 +228,7 @@ export default function Transactions() {
         </Dialog>
       </div>
       <div className="table">
-        <TransactionTable />
+        <TransactionTable data={userTxns} />
       </div>
     </div>
   );

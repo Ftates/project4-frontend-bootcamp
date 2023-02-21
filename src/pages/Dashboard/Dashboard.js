@@ -2,8 +2,6 @@ import React from "react";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import "./Dashboard.css";
-import Sidebar from "../../components/sidebar";
-import BarChart from "../../components/BarChart";
 import LineChart from "../../components/LineChart";
 import DoughnutChart from "../../components/Doughnut";
 
