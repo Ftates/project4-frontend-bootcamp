@@ -5,13 +5,11 @@
   font-size: 25px;
   justify-content: center;
   align-items: center;
-  background-color: beige;
 }
 
 .Screen .dashboard {
   display: flex;
   flex-direction: column;
-  background-color: wheat;
 }
 
 .header {

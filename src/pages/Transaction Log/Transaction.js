@@ -45,6 +45,7 @@ export default function Transactions() {
     const response = await axios.get(
       "http://localhost:3001/wallets/getAllWallets",
       { params: { user_id: loggedUser.id } }
+      { params: { user_id: loggedUser.id } }
     );
     const data = response.data.wallets;
     setUserWallets(data);
@@ -53,6 +54,7 @@ export default function Transactions() {
   async function getUserTransaction() {
     const response = await axios.get(
       "http://localhost:3001/transactions/getAllTransactions",
+      { params: { user_id: loggedUser.id } }
       { params: { user_id: loggedUser.id } }
     );
     setUserTxns(response.data.data);
@@ -119,10 +121,21 @@ export default function Transactions() {
       );
 
       try {
-        const addTxn = await axios.post(
-          "http://localhost:3001/transactions/addTransaction",
-          payload
-        );
+        const checkIfCoinIsSupported = await axios.get("http://localhost:3001/coinlist/getCoinId", {
+          params: {coin: coin}
+        })
+        console.log("SANITY CHECK", checkIfCoinIsSupported)
+        if (checkIfCoinIsSupported.data.success === true){
+          const addTxn = await axios.post(
+            "http://localhost:3001/transactions/addTransaction",
+            payload
+          );
+        } else {
+          // insert error message here
+          alert("coin not supported")
+        }
+
+        
       } catch (err) {
         console.log(err);
       }
@@ -137,6 +150,7 @@ export default function Transactions() {
     setPrice(0);
 
     setOpen(false);
+    navigate("/transactions")
   };
 
   return (

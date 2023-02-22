@@ -75,7 +75,7 @@ const useNavigateMap = (route) => {
 root.render(
   // <React.StrictMode>
   <>
-    {/* {
+    {
       <MainPageCanvas
         onChildEvent={retrieveAnimationEvent}
         onChildEvent2={retrieveToggleDisplay}
@@ -83,7 +83,7 @@ root.render(
           useNavigateMap(e);
         }}
       />
-    } */}
+    }
     <BrowserRouter>
       <AuthProvider>
         <Routes>
