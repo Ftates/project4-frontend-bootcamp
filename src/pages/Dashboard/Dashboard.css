@@ -1,7 +1,45 @@
 .Screen {
-    width: 100vw;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  font-size: 25px;
+  justify-content: center;
+  align-items: center;
+  background-color: beige;
+}
+
+.Screen .dashboard {
+  display: flex;
+  flex-direction: column;
+  background-color: wheat;
+}
+
+.header {
+  display: flex;
+  width: 1000px;
+  height: 340px;
+  margin-bottom: 20px;
+  align-content: space-evenly;
+}
+
+.item1 {
+  width: 750px;
+  height: 300px;
+  margin: 10px 10px 10px 0px;
+  border: 1px solid black;
+}
+
+.item2 {
+  width: 300px;
+  height: 300px;
+  margin: 10px 0px 10px 0px;
+  border: 1px solid black;
+}
+
+.overview {
+  width: 1000px;
+  height: 300px;
+  margin-top: 30px;
+  border: 1px solid black;
+  align-self: center;
 }

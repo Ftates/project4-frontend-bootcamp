@@ -13,92 +13,120 @@ import { LearnMore } from "./pages/Home/LearnMore";
 import { Word0 } from "./pages/Home/Word0";
 import Login from "./pages/Login/Login";
 import { Register } from "./pages/Register/Register";
-import { Dashboard } from "./pages/Dashboard/Dashboard.js";
+import Dashboard from "./pages/Dashboard/Dashboard.js";
 import { WalletList } from "./pages/WalletList/WalletList.js";
+import Transactions from "./pages/Transaction Log/Transaction";
 
 // console.log("authprovider",AuthProvider)
 
-
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
-let animationMap = {}
-let navigateMap = {}
-let toggleDisplayFunc 
-
+let animationMap = {};
+let navigateMap = {};
+let toggleDisplayFunc;
 
 // going into the Threejs components to retrieve the functions and store them in funcMap
 const retrieveAnimationEvent = (map) => {
-  animationMap = map
+  animationMap = map;
   // funcMap.animateMeshToScrollView = e
-}
+};
 
-// going into react component to grab navigate functions 
+// // going into react component to grab navigate functions
 const retrieveNavigateEvent = (map) => {
-  navigateMap = map
-  console.log("retrieved navigate map",navigateMap)
-}
+  navigateMap = map;
+  console.log("retrieved navigate map", navigateMap);
+};
 
 const retrieveToggleDisplay = (func) => {
-  toggleDisplayFunc = func
-}
+  toggleDisplayFunc = func;
+};
 
-// getting event from React app to call the specific funtion from 
+// getting event from React app to call the specific funtion from
 const handleAnimationEvent = (route) => {
   // console.log("alivent check")
-  if(route === "toHomePageView")animationMap.animateMeshtoHomePageView()
-  if(route === "toDashboardPageView")animationMap.animateMeshtoDashboardPageView()
-  if(route === "toLearnMoreView")animationMap.animateMeshToLearnMoreView()
-  if(route === "toLearnMoreView2")animationMap.animateMeshToLearnMoreView2()
-  if(route === "word0View")animationMap.animateMeshToScrollView()
-  if(route === "word1View")animationMap.animateMeshToScrollView1()
-  if(route === "word2View")animationMap.animateMeshToScrollView2()
-  if(route === "word3View")animationMap.animateMeshToScrollView3()
-  if(route === "word4View")animationMap.animateMeshToScrollView4()
-  if(route === "word5View")animationMap.animateMeshToScrollView5()
-  else{
-    console.log("check handleAnimationEvent func on index.js route:",route)
+  if (route === "toHomePageView") animationMap.animateMeshtoHomePageView();
+  if (route === "toDashboardPageView")
+    animationMap.animateMeshtoDashboardPageView();
+  if (route === "toLearnMoreView") animationMap.animateMeshToLearnMoreView();
+  if (route === "toLearnMoreView2") animationMap.animateMeshToLearnMoreView2();
+  if (route === "word0View") animationMap.animateMeshToScrollView();
+  if (route === "word1View") animationMap.animateMeshToScrollView1();
+  if (route === "word2View") animationMap.animateMeshToScrollView2();
+  if (route === "word3View") animationMap.animateMeshToScrollView3();
+  if (route === "word4View") animationMap.animateMeshToScrollView4();
+  if (route === "word5View") animationMap.animateMeshToScrollView5();
+  else {
+    console.log("check handleAnimationEvent func on index.js route:", route);
   }
-}
+};
 
 const useNavigateMap = (route) => {
-  if(route === "word0")navigateMap.onWord0Click()
-  if(route === "word1")navigateMap.onWord1Click()
-  if(route === "word2")navigateMap.onWord2Click()
-  if(route === "word3")navigateMap.onWord3Click()
-  if(route === "word4")navigateMap.onWord4Click()
-  if(route === "word5")navigateMap.onWord5Click()
-  else{
-    console.log("check useNavigateMap function in index.js route:",route)
+  if (route === "word0") navigateMap.onWord0Click();
+  if (route === "word1") navigateMap.onWord1Click();
+  if (route === "word2") navigateMap.onWord2Click();
+  if (route === "word3") navigateMap.onWord3Click();
+  if (route === "word4") navigateMap.onWord4Click();
+  if (route === "word5") navigateMap.onWord5Click();
+  else {
+    console.log("check useNavigateMap function in index.js route:", route);
   }
-}
-
-
+};
 
 root.render(
   // <React.StrictMode>
   <>
-    <MainPageCanvas 
-      onChildEvent={retrieveAnimationEvent}
-      onChildEvent2={retrieveToggleDisplay}
-      callNavigate={(e)=>{useNavigateMap(e)}}
+    {/* {
+      <MainPageCanvas
+        onChildEvent={retrieveAnimationEvent}
+        onChildEvent2={retrieveToggleDisplay}
+        callNavigate={(e) => {
+          useNavigateMap(e);
+        }}
       />
+    } */}
     <BrowserRouter>
       <AuthProvider>
         <Routes>
-          <Route path="/" element={<Overlay onChildEvent={(e)=>{handleAnimationEvent(e)}}/>}>
-            <Route path="/" element={<App onChildEvent={(e)=>handleAnimationEvent(e)}/>}/>
-            <Route path="/learnMore" element={<LearnMore onChildEvent={retrieveNavigateEvent}/>}>
-              <Route path="/learnMore/word0" element={<Word0 onChildEvent={(e)=>handleAnimationEvent(e)}/>}/>
-            </Route>
-            <Route path="/login" element={<Login onChildEvent={(e)=>handleAnimationEvent(e)}/>}/>
-            <Route path="/register" element={<Register onChildEvent={(e)=>handleAnimationEvent(e)}/>}/>
-            <Route path="/dashboard" element={<Dashboard/>}/>
-            <Route path="/walletList" element={<WalletList/>}/>
-          </Route>
+          {/* <Route
+            path="/"
+            element={
+              <Overlay
+                onChildEvent={(e) => {
+                  handleAnimationEvent(e);
+                }}
+              />
+            }
+          >
+            <Route
+              path="/"
+              element={<App onChildEvent={(e) => handleAnimationEvent(e)} />}
+            />
+            <Route
+              path="/learnMore"
+              element={<LearnMore onChildEvent={retrieveNavigateEvent} />}
+            >
+              <Route
+                path="/learnMore/word0"
+                element={
+                  <Word0 onChildEvent={(e) => handleAnimationEvent(e)} />
+                }
+              />
+            </Route> */}
+          <Route
+            path="/login"
+            element={<Login onChildEvent={(e) => handleAnimationEvent(e)} />}
+          />
+          <Route
+            path="/register"
+            element={<Register onChildEvent={(e) => handleAnimationEvent(e)} />}
+          />
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/walletList" element={<WalletList />} />
+          <Route path="/transactions" element={<Transactions />} />
+          {/* </Route> */}
         </Routes>
       </AuthProvider>
     </BrowserRouter>
-    
   </>
   // </React.StrictMode>
 );
