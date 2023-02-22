@@ -139,4 +139,6 @@
 
 .wallet-list-graphs-container{
     color: white;
+    position: absolute;
+    bottom: 55vh;
 }

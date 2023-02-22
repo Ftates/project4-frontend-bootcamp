@@ -67,7 +67,7 @@ export const WalletList = () => {
         </div>
 
         <div className="wallet-list-graphs-container">
-          <DoughnutChart />>
+          <DoughnutChart />
         </div>
 
         <div className="currentWalletsContainer">
