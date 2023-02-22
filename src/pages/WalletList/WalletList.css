@@ -6,7 +6,7 @@
   align-items: center;
   flex-direction: column;
   /* delete background color later */
-  /* background-color: grey; */
+  background-color: grey;
 }
 
 .addWalletForm {

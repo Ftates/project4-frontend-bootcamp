@@ -39,7 +39,7 @@ export default function Transactions() {
   async function getUserWallet() {
     const response = await axios.get(
       "http://localhost:3001/wallets/getAllWallets",
-      { params: { user_id: 1 } }
+      { params: { user_id: 5 } }
     );
     const data = response.data.wallets;
     setUserWallets(data);
@@ -48,9 +48,10 @@ export default function Transactions() {
   async function getUserTransaction() {
     const response = await axios.get(
       "http://localhost:3001/transactions/getAllTransactions",
-      { params: { user_id: 1 } }
+      { params: { user_id: 5 } }
     );
     setUserTxns(response.data.data);
+    console.log(response.data);
   }
 
   useEffect(() => {
@@ -86,7 +87,8 @@ export default function Transactions() {
 
   function getPayload(wallet_id, date, wallet, coin, type, quantity, price) {
     const foo = {
-      user_id: 1,
+      /// ADD USER_ID ///
+      user_id: 5,
       wallet_id: wallet_id,
       date: date,
       wallet: wallet,
