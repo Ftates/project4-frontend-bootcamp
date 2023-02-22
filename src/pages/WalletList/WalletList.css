@@ -135,6 +135,12 @@
   left: 65%;
 }
 
+<<<<<<<<< Temporary merge branch 1
+
+
+.wallet-list-graphs-container{
+    color: white;
+=========
 .wallet-list-graphs-container {
   color: white;
   display: flex;
