@@ -49,10 +49,10 @@ export const Overlay = (props) => {
                     <MenuItem onClick={()=>{navigate("/dashboard") ;props.onChildEvent("toDashboardPageView")}}>Dashboard</MenuItem>
                     <Divider sx={{backgroundColor:"white"}}/>
                     <MenuItem onClick={()=>{navigate("/walletList") ;props.onChildEvent("toDashboardPageView")}}>Wallet List</MenuItem>
+                    {/* <Divider sx={{backgroundColor:"white"}}/>
+                    <MenuItem onClick={()=>{props.onChildEvent("toDashboardPageView")}}>Watch List</MenuItem> */}
                     <Divider sx={{backgroundColor:"white"}}/>
-                    <MenuItem onClick={()=>{props.onChildEvent("toDashboardPageView")}}>Watch List</MenuItem>
-                    <Divider sx={{backgroundColor:"white"}}/>
-                    <MenuItem onClick={()=>{props.onChildEvent("toDashboardPageView")}}>Transaction Log</MenuItem>
+                    <MenuItem onClick={()=>{navigate("/transactions") ;props.onChildEvent("toDashboardPageView")}}>Transaction Log</MenuItem>
                     <Divider sx={{backgroundColor:"white"}}/>
                     <MenuItem onClick={()=>{handleLogout()}}>Logout</MenuItem>
                   </MenuList>

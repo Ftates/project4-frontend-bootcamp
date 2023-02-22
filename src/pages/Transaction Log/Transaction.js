@@ -24,6 +24,7 @@ import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../AuthContext/AuthContext";
 
+
 export default function Transactions() {
   const [open, setOpen] = useState(false);
   const [date, setDate] = useState("");
@@ -38,8 +39,10 @@ export default function Transactions() {
 
   const [userWallets, setUserWallets] = useState([]);
 
+
   const navigate = useNavigate();
   const { isAuth, loggedUser } = useAuth();
+
 
   async function getUserWallet() {
     const response = await axios.get(
@@ -92,7 +95,7 @@ export default function Transactions() {
 
   function getPayload(wallet_id, date, wallet, coin, type, quantity, price) {
     const foo = {
-      /// ADD USER_ID ///
+
       user_id: loggedUser.id,
       wallet_id: wallet_id,
       date: date,
@@ -119,10 +122,21 @@ export default function Transactions() {
       );
 
       try {
-        const addTxn = await axios.post(
-          "http://localhost:3001/transactions/addTransaction",
-          payload
-        );
+        const checkIfCoinIsSupported = await axios.get("http://localhost:3001/coinlist/getCoinId", {
+          params: {coin: coin}
+        })
+        console.log("SANITY CHECK", checkIfCoinIsSupported)
+        if (checkIfCoinIsSupported.data.success === true){
+          const addTxn = await axios.post(
+            "http://localhost:3001/transactions/addTransaction",
+            payload
+          );
+        } else {
+          // insert error message here
+          alert("coin not supported")
+        }
+
+        
       } catch (err) {
         console.log(err);
       }
@@ -137,6 +151,7 @@ export default function Transactions() {
     setPrice(0);
 
     setOpen(false);
+    navigate("/transactions")
   };
 
   return (

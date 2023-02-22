@@ -3,6 +3,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import addWallet from '../../API_Services/addWallet.js'
 import { useAuth } from '../../AuthContext/AuthContext.js';
 import { useNavigate } from 'react-router-dom';
+import { WalletList } from './WalletList.js';
 
 
 const AddWalletForm = (props) => {
@@ -20,7 +21,7 @@ const AddWalletForm = (props) => {
         addWallet(walletName, walletAddress, walletType, loggedUser.id)
             .then(()=>{
                 props.onChildEvent(true)
-                navigate("/walletList")
+                props.onFormSubmit([...props.walletList, {name:walletName,address:walletAddress,type:walletType,userId:loggedUser.id}])
             })
     }
 

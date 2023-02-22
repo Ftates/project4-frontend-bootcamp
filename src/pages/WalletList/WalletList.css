@@ -62,14 +62,29 @@
   text-decoration: none;
 }
 
+.add-wallet-button {
+    text-decoration: none;
+    border: none;
+    border-radius: 15px;
+    margin-bottom: 7.5px;
+}
+.add-wallet-button:hover {
+    background-color: rgb(175, 174, 174);
+}
+
 .wallet-data-header {
   display: flex;
   justify-content: center;
   /* align-content: space-evenly; */
 }
 .wallet-data-point {
-  display: flex;
-  justify-content: center;
+    display: flex;
+    justify-content: center;
+    margin-block: 5px;
+}
+
+.wallet-data-point.selected {
+    background-color: #22A39F;
 }
 
 .formContainer {
@@ -120,6 +135,12 @@
   left: 65%;
 }
 
+
 .wallet-list-graphs-container {
   display: flex;
+
+
+
+    color: white;
+
 }
