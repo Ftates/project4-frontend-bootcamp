@@ -5,6 +5,7 @@
   font-size: 25px;
   justify-content: center;
   align-items: center;
+  background-color: lightgray;
 }
 
 .Screen .dashboard {
@@ -37,4 +38,49 @@
   height: 300px;
   margin-top: 30px;
   align-self: center;
+}
+
+.currentWalletsTable {
+  border: solid wheat;
+  height: 100%;
+  width: 100%;
+  color: white;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  overflow: scroll;
+}
+
+.wallet-data-header {
+  display: flex;
+  justify-content: center;
+  /* align-content: space-evenly; */
+}
+.wallet-data-point {
+  display: flex;
+  justify-content: center;
+  margin-block: 5px;
+}
+
+.currentWalletsContainer {
+  width: 80vw;
+  height: 40vh;
+  display: flex;
+  position: relative;
+  top: 20vh;
+  border: solid white;
+  flex-direction: column;
+  padding: 25px;
+}
+
+.currentWalletsContainerHeader {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: 10%;
+  width: 100%;
+}
+
+.currentWalletsContainerHeader span {
+  color: wheat;
 }
