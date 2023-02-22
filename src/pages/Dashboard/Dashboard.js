@@ -16,7 +16,7 @@ export default function Dashboard() {
   const [portfolioGrowth, setPortfolioGrowth] = useState([]);
 
   const navigate = useNavigate();
-  const { isAuth } = useAuth;
+  const { isAuth } = useAuth();
 
   useEffect(() => {
     if (isAuth !== true) {
@@ -90,16 +90,18 @@ export default function Dashboard() {
 
   return (
     <div className="Screen">
-      <span>Dashboard</span>
-      <div className="dashboard">
-        <div className="header">
-          <div className="item1">{/* <LineChart chartData={test} /> */}</div>
-          <div className="item2">
-            <DoughnutChart />
+      <div>
+        {/* <span>Dashboard</span> */}
+        <div className="dashboard">
+          <div className="header">
+            <div className="item1">{/* <LineChart chartData={test} /> */}</div>
+            <div className="item2">
+              <DoughnutChart />
+            </div>
           </div>
-        </div>
-        <div className="overview">
-          {/* <LineChart chartData={inputChartData} /> */}
+          <div className="overview">
+            {/* <LineChart chartData={inputChartData} /> */}
+          </div>
         </div>
       </div>
     </div>
