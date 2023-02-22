@@ -76,7 +76,7 @@ export const WalletList = () => {
 
         <div className="wallet-list-graphs-container">
           {chartData.map((walletData) => (
-            <DoughnutChart chartData={walletData} />
+            <DoughnutChart key={walletData["name"]} chartData={walletData} />
           ))}
         </div>
 
