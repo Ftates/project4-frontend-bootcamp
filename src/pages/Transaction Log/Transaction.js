@@ -157,9 +157,7 @@ export default function Transactions() {
   return (
     <div className="Screen">
       <div>
-        <Button variant="contained" onClick={handleClickOpen}>
-          + New Transaction
-        </Button>
+        
 
         <Dialog maxWidth={"lg"} open={open} onClose={handleClose}>
           <DialogTitle>Add Transaction</DialogTitle>
@@ -270,7 +268,14 @@ export default function Transactions() {
       </div>
       <div className="table">
         <TransactionTable data={userTxns} />
+
+        <div className="add-transaction-button-box">
+          <Button variant="contained" onClick={handleClickOpen} className='add-transaction-button'>
+            + New Transaction
+          </Button>
+        </div>
       </div>
+      
     </div>
   );
 }

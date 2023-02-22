@@ -30,15 +30,46 @@
     opacity: 1;
     transition: transform 0.5s ease-out, opacity 0.5s ease-out;
 }
-  
 .PageContainer.hidden {
     transform: translateX(-100%);
     opacity: 0;
 }
-
 .PageContainer button{
     text-decoration: none;
     font-size: larger;
     background: none;
     border: none;
+}
+
+.page-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.page-box header {
+    font-size: 36px;
+}
+
+.page-text {
+    overflow: scroll;
+    height: 75vh;
+    
+}
+.page-text::-webkit-scrollbar{
+    display: none;
+    height: 10px;
+    width: 10px;
+}
+
+.img-container img{
+    height: 200px;
+    /* width: 250px; */
+}
+
+
+.big-ass-scrollcoin {
+    position: absolute;
+    height: 100%;
+    width: 50vw;
+    left: 50vw;
 }
