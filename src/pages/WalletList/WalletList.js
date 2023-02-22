@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 import DoughnutChart from "../../components/Doughnut.js";
 
 import formatWalletValue from "../../helpers/formatWalletValue";
+import formatWalletChartData from "../../helpers/formatWalletChartData";
 
 export const WalletList = () => {
   const { loggedUser, isAuth } = useAuth();
@@ -17,6 +18,7 @@ export const WalletList = () => {
   const [walletList, setWalletList] = useState([]);
   const [walletValueList, setWalletValueList] = useState([]);
   const [walletListHoldings, setWalletListHoldings] = useState([]);
+  const [chartData, setChartData] = useState([]);
 
   useEffect(() => {
     if (isAuth !== true) {
@@ -38,7 +40,7 @@ export const WalletList = () => {
       const values = await Promise.all(
         walletList.map(async (e) => {
           const res = await getWalletValue(e.id, loggedUser.id);
-          console.log("Response:", res);
+          // console.log("Response:", res);
 
           return res;
         })
@@ -50,13 +52,19 @@ export const WalletList = () => {
   }, [walletList]);
 
   useEffect(() => {
-    console.log("Wallet List HOLDINGS: ", walletListHoldings);
+    // console.log("WALLET LIST", walletList);
+    // console.log("Wallet List HOLDINGS: ", walletListHoldings);
     const totalValue = formatWalletValue(walletListHoldings);
     setWalletValueList(totalValue);
+    const data = formatWalletChartData(walletList, walletListHoldings);
+    setChartData(data);
   }, [walletListHoldings]);
 
   useEffect(() => {
-    // console.log(walletValueList);
+    // console.log("WALLET LIST: ", walletList);
+    // console.log("WALLET VALUE LIST: ", walletValueList);
+    // console.log("WALLET LIST HOLDINGS: ", walletListHoldings);
+    // console.log("CHART DATA: ", chartData);
   }, [walletValueList]);
 
   return (
@@ -67,7 +75,9 @@ export const WalletList = () => {
         </div>
 
         <div className="wallet-list-graphs-container">
-          <DoughnutChart />>
+          {chartData.map((walletData) => (
+            <DoughnutChart chartData={walletData} />
+          ))}
         </div>
 
         <div className="currentWalletsContainer">
