@@ -43,7 +43,6 @@ function DoughnutChart({ chartData }) {
     },
   };
 
-  console.log(value);
   return (
     <div>
       <div>{value && `${coin} and $${value}`}</div>

@@ -1,123 +1,133 @@
-import React, { useEffect, useState } from 'react'
-import './WalletList.css'
-import AddWalletForm from './AddWalletForm'
-import getAllWallet from '../../API_Services/getAllWallet'
-import getWalletValue from '../../API_Services/getWalletValue'
-import { useAuth } from '../../AuthContext/AuthContext'
-import axios from 'axios'
-import { useNavigate } from 'react-router-dom'
+import React, { useEffect, useState } from "react";
+import "./WalletList.css";
+import AddWalletForm from "./AddWalletForm";
+import getAllWallet from "../../API_Services/getAllWallet";
+import getWalletValue from "../../API_Services/getWalletValue";
+import { useAuth } from "../../AuthContext/AuthContext";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import DoughnutChart from "../../components/Doughnut.js";
+
+import formatWalletValue from "../../helpers/formatWalletValue";
 
 export const WalletList = () => {
-
-  const { loggedUser, isAuth } = useAuth()
-  const navigate = useNavigate()
-  const [hidden, setHidden] = useState(true)
-  const [walletList, setWalletList] = useState([])
-  const [walletValueList, setWalletValueList] = useState([])
-  // selectedWallet's graph will be displayed
-  const [selectedWallet, setSelectedWallet] = useState()
+  const { loggedUser, isAuth } = useAuth();
+  const navigate = useNavigate();
+  const [hidden, setHidden] = useState(true);
+  const [walletList, setWalletList] = useState([]);
+  const [walletValueList, setWalletValueList] = useState([]);
+  const [walletListHoldings, setWalletListHoldings] = useState([]);
 
   useEffect(() => {
-    if(isAuth!==true){
-      navigate("/")
+    if (isAuth !== true) {
+      navigate("/");
     }
-  
+
     async function retrieveWallets() {
-      console.log("loggeduserid",loggedUser.id)
-      let arr = await getAllWallet(loggedUser.id)
-      console.log("setwalletlist",arr)
-      setWalletList(arr)
+      let arr = await getAllWallet(loggedUser.id);
+      setWalletList(arr);
     }
 
-    retrieveWallets()
-  },[isAuth])
+    retrieveWallets();
+  }, [isAuth]);
 
-  useEffect(()=>{
+  useEffect(() => {
+    // console.log("BEFORE wallet list: ", walletList);
+
     const retrieveData = async () => {
-      const values = await Promise.all(walletList.map(async(e)=>{
-        const res = await getWalletValue(e.id, loggedUser.id)
-        return res
-      }))
-      setWalletValueList(values)
-    }
-    retrieveData()
-  },[walletList])
+      const values = await Promise.all(
+        walletList.map(async (e) => {
+          const res = await getWalletValue(e.id, loggedUser.id);
+          console.log("Response:", res);
 
-  const handleHighlight = (e) => {
-    console.log("selected text: ",e.target.innerText)
-    // if innerText is = walletlist obj name thing, they match, so display that chart for that obj?
-    console.log("walle-e list",walletList)
-    walletList.forEach((obj)=>{
-      if(e.target.innerText === obj.name){
-        setSelectedWallet(obj)
-      }
-    })
+          return res;
+        })
+      );
 
-    // highlighting, but i dunno how to unhighlight so im not putting it in yet
-    // e.target.className = "wallet-data-point selected"
-  }
+      setWalletListHoldings(values);
+    };
+    retrieveData();
+  }, [walletList]);
 
-  console.log("walle-e list",walletList)
-  
+  useEffect(() => {
+    console.log("Wallet List HOLDINGS: ", walletListHoldings);
+    const totalValue = formatWalletValue(walletListHoldings);
+    setWalletValueList(totalValue);
+  }, [walletListHoldings]);
+
+  useEffect(() => {
+    // console.log(walletValueList);
+  }, [walletValueList]);
+
   return (
     <>
-        <div className='ScreenWalletList'>
-          <div className={`addWalletForm ${hidden === true ? "hidden" : "" }`}>
-              <AddWalletForm onChildEvent={setHidden} onFormSubmit={setWalletList} walletList={walletList}/>
-          </div>
-
-          <div className='wallet-list-graphs-container'>
-            Graphs here {selectedWallet ? selectedWallet.name : ""}
-          </div>
-
-          <div className='currentWalletsContainer'>
-            <div className='currentWalletsContainerHeader'>
-              <span>Wallets</span>
-
-              <button className='add-wallet-button' onClick={()=>{setHidden(!hidden)}}>add wallet +</button>
-            </div>
-
-            
-            <div className='currentWalletsTable'>
-              <div className='currentWalletsTableColumn'>
-                <header className='wallet-data-header'>Wallet Name</header>
-                {walletList.map((obj)=>{
-                  return(
-                    <span onClick={(e)=>{handleHighlight(e)}} key={obj.id} className='wallet-data-point'>{obj.name}</span>
-                  )
-                })}
-              </div>
-              <div className='currentWalletsTableColumn'>
-                <header className='wallet-data-header'>Wallet Address</header>
-                {walletList.map((obj)=>{
-                  return(
-                    <span key={obj.id} className='wallet-data-point'>{obj.address}</span>
-                  )
-                })}
-              </div>
-              <div className='currentWalletsTableColumn'>
-                <header className='wallet-data-header'>Wallet Type</header>
-                {walletList.map((obj)=>{
-                  return(
-                    <span key={obj.id} className='wallet-data-point'>{obj.type}</span>
-                  )
-                })}
-              </div>
-              <div className='currentWalletsTableColumn'>
-                <header className='wallet-data-header'>Wallet Value</header>
-                {walletValueList.length > 0 && walletValueList.map((walletvalue)=>{
-                  return(
-                    <span  className='wallet-data-point'>{walletvalue}</span>
-                  )
-                })}
-
-              </div>
-            </div>
-           
-          </div>
-
-            
+      <div className="ScreenWalletList">
+        <div className={`addWalletForm ${hidden === true ? "hidden" : ""}`}>
+          <AddWalletForm onChildEvent={setHidden} />
         </div>
+
+        <div className="wallet-list-graphs-container">
+          <DoughnutChart />>
+        </div>
+
+        <div className="currentWalletsContainer">
+          <div className="currentWalletsContainerHeader">
+            <span>Wallets</span>
+
+            <button
+              onClick={() => {
+                setHidden(!hidden);
+              }}
+            >
+              add wallet +
+            </button>
+          </div>
+
+          <div className="currentWalletsTable">
+            <div className="currentWalletsTableColumn">
+              <header className="wallet-data-header">Wallet Name</header>
+              {walletList.map((e) => {
+                return (
+                  <span key={e.id} className="wallet-data-point">
+                    {e.name}
+                  </span>
+                );
+              })}
+            </div>
+            <div className="currentWalletsTableColumn">
+              <header className="wallet-data-header">Wallet Address</header>
+              {walletList.map((e) => {
+                return (
+                  <span key={e.id} className="wallet-data-point">
+                    {e.address}
+                  </span>
+                );
+              })}
+            </div>
+            <div className="currentWalletsTableColumn">
+              <header className="wallet-data-header">Wallet Type</header>
+              {walletList.map((e) => {
+                return (
+                  <span key={e.id} className="wallet-data-point">
+                    {e.type}
+                  </span>
+                );
+              })}
+            </div>
+            <div className="currentWalletsTableColumn">
+              <header className="wallet-data-header">Wallet Value</header>
+              {walletValueList.length > 0 &&
+                walletValueList.map((e) => {
+                  return (
+                    <span key={e} className="wallet-data-point">
+                      {e}
+                    </span>
+                  );
+                })}
+            </div>
+          </div>
+        </div>
+      </div>
     </>
-  )
-}
+  );
+};

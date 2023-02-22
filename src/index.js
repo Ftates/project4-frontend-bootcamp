@@ -112,17 +112,19 @@ root.render(
                 }
               />
             </Route>
-          <Route
-            path="/login"
-            element={<Login onChildEvent={(e) => handleAnimationEvent(e)} />}
-          />
-          <Route
-            path="/register"
-            element={<Register onChildEvent={(e) => handleAnimationEvent(e)} />}
-          />
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/walletList" element={<WalletList />} />
-          <Route path="/transactions" element={<Transactions />} />
+            <Route
+              path="/login"
+              element={<Login onChildEvent={(e) => handleAnimationEvent(e)} />}
+            />
+            <Route
+              path="/register"
+              element={
+                <Register onChildEvent={(e) => handleAnimationEvent(e)} />
+              }
+            />
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/walletList" element={<WalletList />} />
+            <Route path="/transactions" element={<Transactions />} />
           </Route>
         </Routes>
       </AuthProvider>

@@ -14,9 +14,10 @@ export default function Dashboard() {
   const [txnData, setTxnData] = useState([]);
   const [walletData, setWalletData] = useState([]);
   const [portfolioGrowth, setPortfolioGrowth] = useState([]);
+  const [userId, setUserId] = useState(0);
 
   const navigate = useNavigate();
-  const { isAuth } = useAuth();
+  const { isAuth, loggedUser } = useAuth();
 
   useEffect(() => {
     if (isAuth !== true) {
@@ -24,11 +25,31 @@ export default function Dashboard() {
     }
   }, [isAuth]);
 
+  useEffect(() => {
+    // console.log("Before: ", userId);
+    getUserId();
+    // console.log("After: ", userId);
+  }, [userId]);
+
+  async function getUserId() {
+    try {
+      const response = await axios.get(
+        "http://localhost:3001/users/getUserId",
+        { params: { email: loggedUser.email } }
+      );
+      const id = response.data.id;
+
+      setUserId(id);
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
   async function getWalletData() {
     try {
       const response = await axios.get(
         "http://localhost:3001/wallets/getWalletData",
-        { params: { user_id: 1, wallet_id: 1 } }
+        { params: { user_id: userId, wallet_id: 1 } }
       );
       const data = response.data;
       setWalletData(data);
@@ -38,11 +59,14 @@ export default function Dashboard() {
   }
 
   function createChartData(input) {
+    if (!input || input.length === 0) {
+      return { labels: [], datasets: [] };
+    }
     const chartData = {
       labels: input.map((data) => data.date),
       datasets: [
         {
-          label: "Value",
+          label: "Portfolio Value",
           data: input.map((data) => data.value),
         },
       ],
@@ -52,20 +76,22 @@ export default function Dashboard() {
   }
 
   async function getPortfolioGrowth() {
+    if (userId === 0) {
+      return;
+    }
+
     const growth = [];
     try {
+      console.log("inside try, user id is ", userId);
       const response = await axios.get(
         "http://localhost:3001/portfolio/getPortfolioGrowth",
-        { params: { user_id: 1 } }
+        { params: { user_id: userId } }
       );
-
       const data = response.data; // array
-
       data.forEach((element) => {
         const dayId = element.days;
         const dates = dateFormat(element.dates);
         const value = element.value;
-
         const payload = {
           id: dayId,
           date: dates,
@@ -73,35 +99,40 @@ export default function Dashboard() {
         };
         growth.push(payload);
       });
-      setPortfolioGrowth(growth);
+      const inputData = createChartData(growth);
+      // console.log("Input data", inputData);
+      setPortfolioGrowth(inputData);
+      // console.log(portfolioGrowth);
     } catch (err) {
       console.log(err);
     }
   }
-  useEffect(() => {
-    getWalletData();
-    getPortfolioGrowth();
-  }, []);
 
   useEffect(() => {
-    // console.log("Wallet data", walletData);
-    console.log("Portfolio Growth", portfolioGrowth);
-  }, [walletData, portfolioGrowth]);
+    getPortfolioGrowth();
+  }, [userId]);
+
+  useEffect(() => {
+    // console.log(portfolioGrowth);
+  }, [portfolioGrowth]);
 
   return (
     <div className="Screen">
-      <div>
-        {/* <span>Dashboard</span> */}
-        <div className="dashboard">
-          <div className="header">
-            <div className="item1">{/* <LineChart chartData={test} /> */}</div>
-            <div className="item2">
-              <DoughnutChart />
-            </div>
+      <span>Dashboard</span>
+      <div className="dashboard">
+        <div className="header">
+          <div className="item1">
+            {console.log(portfolioGrowth)}
+            {portfolioGrowth !== [] ? (
+              <LineChart chartData={portfolioGrowth} />
+            ) : null}
           </div>
-          <div className="overview">
-            {/* <LineChart chartData={inputChartData} /> */}
+          <div className="item2">
+            <DoughnutChart data={"H"} />
           </div>
+        </div>
+        <div className="overview">
+          {/* <LineChart chartData={inputChartData} /> */}
         </div>
       </div>
     </div>

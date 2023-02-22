@@ -56,6 +56,7 @@ export default function Transactions() {
       { params: { user_id: loggedUser.id } }
     );
     setUserTxns(response.data.data);
+    console.log(response.data);
   }
 
   useEffect(() => {
