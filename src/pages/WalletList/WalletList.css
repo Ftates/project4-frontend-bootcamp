@@ -6,7 +6,7 @@
   align-items: center;
   flex-direction: column;
   /* delete background color later */
-  background-color: grey;
+  /* background-color: grey; */
 }
 
 .addWalletForm {
@@ -42,9 +42,15 @@
   height: 10%;
   width: 100%;
 }
-
 .currentWalletsContainerHeader span {
   color: wheat;
+}
+.currentWalletsContainerHeader button {
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+    background-color: none;
+    font-size: large;
 }
 
 .currentWalletsTable {
@@ -75,6 +81,7 @@
 .wallet-data-header {
   display: flex;
   justify-content: center;
+  border-bottom: solid white;
   /* align-content: space-evenly; */
 }
 .wallet-data-point {
@@ -138,9 +145,6 @@
 
 .wallet-list-graphs-container {
   display: flex;
-
-
-
     color: white;
     position: absolute;
     bottom: 55vh;

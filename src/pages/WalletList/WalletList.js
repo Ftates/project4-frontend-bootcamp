@@ -130,7 +130,7 @@ export const WalletList = () => {
                 walletValueList.map((e) => {
                   return (
                     <span key={e} className="wallet-data-point">
-                      {e}
+                      {e} USD
                     </span>
                   );
                 })}
