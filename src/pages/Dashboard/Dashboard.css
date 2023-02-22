@@ -5,7 +5,6 @@
   font-size: 25px;
   justify-content: center;
   align-items: center;
-  background-color: lightgray;
 }
 
 .Screen .dashboard {
@@ -83,4 +82,8 @@
 
 .currentWalletsContainerHeader span {
   color: wheat;
+}
+
+::-webkit-scrollbar {
+  display: none;
 }

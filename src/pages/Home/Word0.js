@@ -166,7 +166,10 @@ export const Word0 = (props) => {
                 <li>Common interest in crypto (dont say it foong)</li>
               </ul>
               <div>
-                <p>The Problem:</p>
+                <h3>The Problem:</h3>
+                <span>Crypto portfolio management is tedious as it requires monitoring multiple wallets and coins and recording different transactions which can be time-consuming and difficult to manage.</span>
+                <h3>The Solution:</h3>
+                <span>KoinFu is a portfolio tracker for cryptocurrencies that allow users to log their trades and track their portfolio across multiple wallets</span>
               </div>
             </div>
           </div>
@@ -200,30 +203,62 @@ export const Word0 = (props) => {
 
           <div key={"page2"} className={`PageContainer ${page2hidden ? "hidden" : ""}`}>
             <button onClick={()=>{props.onChildEvent("toLearnMoreView"); navigate("/learnMore")}}>Back</button>
-
-            <header>Key Features</header>
-            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+            <div className='page-box'>
+              <header>Key Features</header>
+              <div>
+                <ul>
+                  <li>Record transaction history</li>
+                  <li>Track multiple wallets and their current value</li>
+                  <li>View your assets distribution in different wallets</li>
+                  <li>Monitor your portfolio growth over time</li>
+                </ul>
+              </div>
+            </div>
           </div>
 
           <div key={"page3"} className={`PageContainer ${page3hidden ? "hidden" : ""}`}>
             <button onClick={()=>{props.onChildEvent("toLearnMoreView2"); navigate("/learnMore")}}>Back</button>
-
-            <header>Additional Features</header>
-            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+            <div className='page-box'>
+              <header>Additional Features</header>
+              <div>
+                <ul>
+                  <li>Looks cool</li>
+                  <li>Able to turn your computer into a space heater</li>
+                </ul>
+              </div>
+            </div>
+            
           </div>
 
           <div key={"page4"} className={`PageContainer ${page4hidden ? "hidden" : ""}`}>
             <button onClick={()=>{props.onChildEvent("toLearnMoreView2"); navigate("/learnMore")}}>Back</button>
-
-            <header>Possible Improvements</header>
-            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+            <div className='page-box'>
+              <header>Possible Improvements</header>
+              <div>
+                <ul>
+                  <li>Lack of validation and error handling</li>
+                  <li>Aesthetics/Animations</li>
+                  <li>Efficiency in API calls</li>
+                </ul>
+              </div>
+            </div>
           </div>
 
           <div key={"page5"} className={`PageContainer ${page5hidden ? "hidden" : ""}`}>
             <button onClick={()=>{props.onChildEvent("toLearnMoreView2"); navigate("/learnMore")}}>Back</button>
-
-            <header>Challenges Faced</header>
-            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+            <div className='page-box'>
+              <header>Challenges Faced</header>
+              <div>
+                <ul>
+                  <li>Working with 3rd party API - limited calls</li>
+                  <li>Some API calls are dependent on each other, making debugging difficult</li>
+                  <li>Managing states and chartJS interactivity</li>
+                  <li>Hard to come up with a wireframe/design for website</li>
+                  <li>Threejs light rendering does not obey the laws of physics</li>
+                  <li>Camera angles during animations</li>
+                </ul>
+              </div>
+            </div>
           </div>
         </div>
 
