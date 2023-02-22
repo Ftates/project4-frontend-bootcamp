@@ -21,6 +21,8 @@ import MenuItem from "@mui/material/MenuItem";
 import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../AuthContext/AuthContext";
 
 export default function Transactions() {
   const [open, setOpen] = useState(false);
@@ -36,10 +38,13 @@ export default function Transactions() {
 
   const [userWallets, setUserWallets] = useState([]);
 
+  const navigate = useNavigate();
+  const { isAuth, loggedUser } = useAuth();
+
   async function getUserWallet() {
     const response = await axios.get(
       "http://localhost:3001/wallets/getAllWallets",
-      { params: { user_id: 5 } }
+      { params: { user_id: loggedUser.id } }
     );
     const data = response.data.wallets;
     setUserWallets(data);
@@ -48,7 +53,7 @@ export default function Transactions() {
   async function getUserTransaction() {
     const response = await axios.get(
       "http://localhost:3001/transactions/getAllTransactions",
-      { params: { user_id: 5 } }
+      { params: { user_id: loggedUser.id } }
     );
     setUserTxns(response.data.data);
     console.log(response.data);
@@ -88,7 +93,7 @@ export default function Transactions() {
   function getPayload(wallet_id, date, wallet, coin, type, quantity, price) {
     const foo = {
       /// ADD USER_ID ///
-      user_id: 5,
+      user_id: loggedUser.id,
       wallet_id: wallet_id,
       date: date,
       wallet: wallet,

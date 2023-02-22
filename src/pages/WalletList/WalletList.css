@@ -121,4 +121,5 @@
 }
 
 .wallet-list-graphs-container {
+  display: flex;
 }
