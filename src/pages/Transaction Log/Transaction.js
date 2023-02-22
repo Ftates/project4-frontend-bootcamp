@@ -21,8 +21,9 @@ import MenuItem from "@mui/material/MenuItem";
 import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
-import { useAuth } from "../../AuthContext/AuthContext";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../AuthContext/AuthContext";
+
 
 export default function Transactions() {
   const [open, setOpen] = useState(false);
@@ -38,8 +39,10 @@ export default function Transactions() {
 
   const [userWallets, setUserWallets] = useState([]);
 
-  const {loggedUser} = useAuth()
-  const navigate = useNavigate()
+
+  const navigate = useNavigate();
+  const { isAuth, loggedUser } = useAuth();
+
 
   async function getUserWallet() {
     const response = await axios.get(
@@ -92,6 +95,7 @@ export default function Transactions() {
 
   function getPayload(wallet_id, date, wallet, coin, type, quantity, price) {
     const foo = {
+
       user_id: loggedUser.id,
       wallet_id: wallet_id,
       date: date,

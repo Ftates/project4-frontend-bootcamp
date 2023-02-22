@@ -136,8 +136,11 @@
 }
 
 
+.wallet-list-graphs-container {
+  display: flex;
 
-.wallet-list-graphs-container{
+
+
     color: white;
     position: absolute;
     bottom: 55vh;

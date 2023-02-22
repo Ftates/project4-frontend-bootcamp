@@ -127,9 +127,7 @@ export default function Dashboard() {
               <LineChart chartData={portfolioGrowth} />
             ) : null}
           </div>
-          <div className="item2">
-            <DoughnutChart data={"H"} />
-          </div>
+          <div className="item2">{/* <DoughnutChart data={"H"} /> */}</div>
         </div>
         <div className="overview">
           {/* <LineChart chartData={inputChartData} /> */}

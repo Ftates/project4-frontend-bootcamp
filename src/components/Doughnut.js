@@ -6,11 +6,15 @@ function DoughnutChart({ chartData }) {
   const [value, setValue] = useState(null);
   const [coin, setCoin] = useState(null);
 
-  const wallet = [
-    { coin: "USD", amt: 1000, value: 1000 },
-    { coin: "ETH", amt: 2.5, value: 3000 },
-    { coin: "BTC", amt: 1, value: 25000 },
-  ];
+  const input = chartData;
+  const name = input["name"];
+  const wallet = input["data"];
+
+  // const wallet = [
+  //   { coin: "USD", amt: 1000, value: 1000 },
+  //   { coin: "ETH", amt: 2.5, value: 3000 },
+  //   { coin: "BTC", amt: 1, value: 25000 },
+  // ];
 
   const data = {
     labels: wallet.map((data) => data.coin),
@@ -30,9 +34,9 @@ function DoughnutChart({ chartData }) {
   };
 
   const options = {
-    onHover: (e, chartdata) => {
-      if (chartdata.length > 0) {
-        const index = chartdata[0].index;
+    onHover: (e, wallet) => {
+      if (wallet.length > 0) {
+        const index = wallet[0].index;
         const amount = data.datasets[0].data[index];
         setValue(amount);
         setCoin(data.labels[index]);
@@ -45,8 +49,9 @@ function DoughnutChart({ chartData }) {
 
   return (
     <div>
-      <div>{value && `${coin} and $${value}`}</div>
+      {/* <div>{value && `${coin} and $${value}`}</div> */}
       <Doughnut data={data} options={options} chart={ChartJS} />
+      <span>{name}</span>
     </div>
   );
 }
