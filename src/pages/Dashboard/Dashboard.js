@@ -8,16 +8,21 @@ import "./Dashboard.css";
 import dateFormat from "../../helpers/dateFormat";
 
 import LineChart from "../../components/LineChart";
-import DoughnutChart from "../../components/Doughnut";
+import DoughnutChart from "./Doughnut-Dashboard";
+import LatestTransaction from "../Dashboard/LatestTransaction";
+
+import getAllWallet from "../../API_Services/getAllWallet";
+import getWalletValue from "../../API_Services/getWalletValue";
+import getAllTransactions from "../../API_Services/getAllTransaction";
 
 export default function Dashboard() {
-  const [txnData, setTxnData] = useState([]);
-  const [walletData, setWalletData] = useState([]);
-  const [portfolioGrowth, setPortfolioGrowth] = useState([]);
-  const [userId, setUserId] = useState(0);
-
   const navigate = useNavigate();
   const { isAuth, loggedUser } = useAuth();
+  const [portfolio, setPortfolio] = useState([]);
+  const [portfolioGrowth, setPortfolioGrowth] = useState([]);
+  const [walletList, setWalletList] = useState([]);
+  const [overviewData, setOverviewData] = useState([]);
+  const [txn, setTxn] = useState([]);
 
   useEffect(() => {
     if (isAuth !== true) {
@@ -25,38 +30,80 @@ export default function Dashboard() {
     }
   }, [isAuth]);
 
-  useEffect(() => {
-    // console.log("Before: ", userId);
-    getUserId();
-    // console.log("After: ", userId);
-  }, [userId]);
-
-  async function getUserId() {
+  async function getPortfolio() {
     try {
       const response = await axios.get(
-        "http://localhost:3001/users/getUserId",
-        { params: { email: loggedUser.email } }
+        "http://localhost:3001/wallets/getPortfolio",
+        { params: { user_id: loggedUser.id } }
       );
-      const id = response.data.id;
-
-      setUserId(id);
-    } catch (err) {
-      console.log(err);
-    }
-  }
-
-  async function getWalletData() {
-    try {
-      const response = await axios.get(
-        "http://localhost:3001/wallets/getWalletData",
-        { params: { user_id: userId, wallet_id: 1 } }
-      );
-      const data = response.data;
-      setWalletData(data);
+      const data = response.data.data;
+      setPortfolio(data);
     } catch (error) {
       console.log(error);
     }
   }
+
+  // async function formatTransaction(userId) {
+  //   const data = await getAllTransactions(userId);
+  //   console.log(data);
+
+  //   if (data.length < 5) {
+  //     setTxn(data);
+  //     return;
+  //   } else {
+  //     const latestFive = data[-5];
+  //     console.log(latestFive);
+  //     setTxn(latestFive);
+  //   }
+  // }
+
+  useEffect(() => {
+    getPortfolio();
+    getAllWallet(loggedUser.id).then((response) => setWalletList(response));
+  }, []);
+
+  useEffect(() => {
+    getAllTransactions(loggedUser.id).then((response) => {
+      const data = response.data;
+      if (data.length <= 5) {
+        setTxn(data);
+      } else {
+        setTxn(data.slice(-5));
+      }
+    });
+  }, []);
+
+  useEffect(() => {
+    console.log(txn);
+  }, [txn]);
+
+  /// TOUCH UP AGAIN AFTER PRESENTATION ///
+  // useEffect(() => {
+  //   formatWalletData(walletList, loggedUser.id);
+  // }, []);
+
+  // async function formatWalletData(walletList, userID) {
+  //   const array = [];
+  //   for (let i = 0; i < walletList.length; i++) {
+  //     const walletID = walletList[i].id;
+  //     const walletName = walletList[i].name;
+
+  //     const data = await getWalletValue(walletID, userID);
+  //     const element = {
+  //       walletID: walletID,
+  //       walletName: walletName,
+  //       data: data,
+  //     };
+
+  //     array.push(element);
+  //   }
+
+  //   setOverviewData(array);
+  // }
+
+  // useEffect(() => {
+  //   console.log("Overview DATA HERE", overviewData);
+  // }, [overviewData]);
 
   function createChartData(input) {
     if (!input || input.length === 0) {
@@ -76,16 +123,11 @@ export default function Dashboard() {
   }
 
   async function getPortfolioGrowth() {
-    if (userId === 0) {
-      return;
-    }
-
     const growth = [];
     try {
-      console.log("inside try, user id is ", userId);
       const response = await axios.get(
         "http://localhost:3001/portfolio/getPortfolioGrowth",
-        { params: { user_id: userId } }
+        { params: { user_id: loggedUser.id } }
       );
       const data = response.data; // array
       data.forEach((element) => {
@@ -110,27 +152,25 @@ export default function Dashboard() {
 
   useEffect(() => {
     getPortfolioGrowth();
-  }, [userId]);
-
-  useEffect(() => {
-    // console.log(portfolioGrowth);
-  }, [portfolioGrowth]);
+  }, []);
 
   return (
     <div className="Screen">
-      <span>Dashboard</span>
       <div className="dashboard">
         <div className="header">
           <div className="item1">
-            {console.log(portfolioGrowth)}
+            Portfolio Value
             {portfolioGrowth !== [] ? (
               <LineChart chartData={portfolioGrowth} />
             ) : null}
           </div>
-          <div className="item2">{/* <DoughnutChart data={"H"} /> */}</div>
+          <div className="item2">
+            Holdings
+            <DoughnutChart chartData={portfolio} />
+          </div>
         </div>
         <div className="overview">
-          {/* <LineChart chartData={inputChartData} /> */}
+          <LatestTransaction data={txn} />
         </div>
       </div>
     </div>
