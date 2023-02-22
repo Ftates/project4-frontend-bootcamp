@@ -75,7 +75,7 @@ const useNavigateMap = (route) => {
 root.render(
   // <React.StrictMode>
   <>
-    {
+    {/* {
       <MainPageCanvas
         onChildEvent={retrieveAnimationEvent}
         onChildEvent2={retrieveToggleDisplay}
@@ -83,11 +83,11 @@ root.render(
           useNavigateMap(e);
         }}
       />
-    }
+    } */}
     <BrowserRouter>
       <AuthProvider>
         <Routes>
-          <Route
+          {/* <Route
             path="/"
             element={
               <Overlay
@@ -111,21 +111,19 @@ root.render(
                   <Word0 onChildEvent={(e) => handleAnimationEvent(e)} />
                 }
               />
-            </Route>
-            <Route
-              path="/login"
-              element={<Login onChildEvent={(e) => handleAnimationEvent(e)} />}
-            />
-            <Route
-              path="/register"
-              element={
-                <Register onChildEvent={(e) => handleAnimationEvent(e)} />
-              }
-            />
-            <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/walletList" element={<WalletList />} />
-            <Route path="/transactions" element={<Transactions />} />
-          </Route>
+            </Route> */}
+          <Route
+            path="/login"
+            element={<Login onChildEvent={(e) => handleAnimationEvent(e)} />}
+          />
+          <Route
+            path="/register"
+            element={<Register onChildEvent={(e) => handleAnimationEvent(e)} />}
+          />
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/walletList" element={<WalletList />} />
+          <Route path="/transactions" element={<Transactions />} />
+          {/* </Route> */}
         </Routes>
       </AuthProvider>
     </BrowserRouter>

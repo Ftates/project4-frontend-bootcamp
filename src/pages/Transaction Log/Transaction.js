@@ -32,12 +32,9 @@ export default function Transactions() {
   const [quantity, setQuantity] = useState(0);
   const [price, setPrice] = useState(0);
 
-  const [newTxn, setNewTxn] = useState({});
   const [userTxns, setUserTxns] = useState([]);
 
   const [userWallets, setUserWallets] = useState([]);
-
-  const [event, setEvent] = useState(true);
 
   async function getUserWallet() {
     const response = await axios.get(
@@ -69,6 +66,8 @@ export default function Transactions() {
     setOpen(false);
   };
 
+  const [test, setTest] = useState({});
+
   const handleChangeForm = (e) => {
     if (e.target.name === "wallet") {
       setWallet(e.target.value);
@@ -83,8 +82,10 @@ export default function Transactions() {
     } else if (e.target.name === "price") {
       setPrice(e.target.value);
     }
+  };
 
-    setNewTxn({
+  function getPayload(wallet_id, date, wallet, coin, type, quantity, price) {
+    const foo = {
       user_id: 1,
       wallet_id: wallet_id,
       date: date,
@@ -93,22 +94,40 @@ export default function Transactions() {
       type: type,
       quantity: quantity,
       price: price,
-    });
-  };
+    };
 
-  useEffect(() => {
-    console.log(newTxn);
-  }, [newTxn]);
+    return foo;
+  }
 
   const handleSubmitForm = async (e) => {
     if (date && wallet && coin && type && quantity && price) {
-      console.log(newTxn);
+      const payload = getPayload(
+        wallet_id,
+        date,
+        wallet,
+        coin,
+        type,
+        quantity,
+        price
+      );
+
+      try {
+        const addTxn = await axios.post(
+          "http://localhost:3001/transactions/addTransaction",
+          payload
+        );
+      } catch (err) {
+        console.log(err);
+      }
     }
 
-    const addTxn = await axios.post(
-      "http://localhost:3001/transactions/addTransaction",
-      newTxn
-    );
+    setDate("");
+    setWallet("");
+    setWalletId(null);
+    setCoin("");
+    setType("");
+    setQuantity(0);
+    setPrice(0);
 
     setOpen(false);
   };

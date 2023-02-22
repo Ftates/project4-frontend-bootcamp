@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../AuthContext/AuthContext";
 import "./Dashboard.css";
+import dateFormat from "../../helpers/dateFormat";
 
 import LineChart from "../../components/LineChart";
 import DoughnutChart from "../../components/Doughnut";
@@ -12,10 +13,10 @@ import DoughnutChart from "../../components/Doughnut";
 export default function Dashboard() {
   const [txnData, setTxnData] = useState([]);
   const [walletData, setWalletData] = useState([]);
+  const [portfolioGrowth, setPortfolioGrowth] = useState([]);
 
   const navigate = useNavigate();
   const { isAuth } = useAuth;
-
   // useEffect(() => {
   //   console.log("isauth", isAuth);
   //   if (isAuth !== true) {
@@ -23,23 +24,10 @@ export default function Dashboard() {
   //   }
   // }, []);
 
-  async function getTxnData() {
-    try {
-      const response = await axios.get(
-        "http://localhost:3000/transactions/getAllTransactions",
-        { params: { user_id: 1 } }
-      );
-      const data = response.data.data;
-      setTxnData(data);
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
   async function getWalletData() {
     try {
       const response = await axios.get(
-        "http://localhost:3000/wallets/getWalletData",
+        "http://localhost:3001/wallets/getWalletData",
         { params: { user_id: 1, wallet_id: 1 } }
       );
       const data = response.data;
@@ -49,76 +37,69 @@ export default function Dashboard() {
     }
   }
 
+  function createChartData(input) {
+    const chartData = {
+      labels: input.map((data) => data.date),
+      datasets: [
+        {
+          label: "Value",
+          data: input.map((data) => data.value),
+        },
+      ],
+    };
+
+    return chartData;
+  }
+
+  async function getPortfolioGrowth() {
+    const growth = [];
+    try {
+      const response = await axios.get(
+        "http://localhost:3001/portfolio/getPortfolioGrowth",
+        { params: { user_id: 1 } }
+      );
+
+      const data = response.data; // array
+
+      data.forEach((element) => {
+        const dayId = element.days;
+        const dates = dateFormat(element.dates);
+        const value = element.value;
+
+        const payload = {
+          id: dayId,
+          date: dates,
+          value: value,
+        };
+        growth.push(payload);
+      });
+      setPortfolioGrowth(growth);
+    } catch (err) {
+      console.log(err);
+    }
+  }
   useEffect(() => {
-    // getTxnData();
-    // getWalletData();
+    getWalletData();
+    getPortfolioGrowth();
   }, []);
 
   useEffect(() => {
-    console.log("Txn Data", txnData);
-  }, [txnData]);
-
-  useEffect(() => {
-    console.log("Wallet data", walletData);
-  }, [walletData]);
-
-  const UserData = [
-    {
-      id: 1,
-      year: 2016,
-      userGain: 80000,
-      userLost: 823,
-    },
-    {
-      id: 2,
-      year: 2017,
-      userGain: 45677,
-      userLost: 345,
-    },
-    {
-      id: 3,
-      year: 2018,
-      userGain: 78888,
-      userLost: 555,
-    },
-    {
-      id: 4,
-      year: 2019,
-      userGain: 90000,
-      userLost: 4555,
-    },
-    {
-      id: 5,
-      year: 2020,
-      userGain: 4300,
-      userLost: 234,
-    },
-  ];
-
-  const [userData, setUserData] = useState({
-    labels: UserData.map((data) => data.year),
-    datasets: [
-      {
-        label: "Users Gained",
-        data: UserData.map((data) => data.userGain),
-      },
-    ],
-  });
+    // console.log("Wallet data", walletData);
+    console.log("Portfolio Growth", portfolioGrowth);
+  }, [walletData, portfolioGrowth]);
 
   return (
     <div className="Screen">
       <span>Dashboard</span>
       <div className="dashboard">
         <div className="header">
-          <div className="item1">
-            <LineChart chartData={userData} />
-          </div>
+          <div className="item1">{/* <LineChart chartData={test} /> */}</div>
           <div className="item2">
             <DoughnutChart />
           </div>
         </div>
         <div className="overview">
-          <LineChart chartData={userData} />
+          {/* <LineChart chartData={inputChartData} /> */}
         </div>
       </div>
     </div>
