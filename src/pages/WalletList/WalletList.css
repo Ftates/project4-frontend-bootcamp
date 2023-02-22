@@ -1,128 +1,124 @@
 .ScreenWalletList {
-    width: 100vw;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  /* delete background color later */
+  background-color: grey;
 }
 
 .addWalletForm {
-    position: absolute;
-    height: 100vh;
-    width: 100vw;
-    /* background-color: rgb(0, 0, 0); */
-    display: flex;
-    /* opacity: 50%; */
-    justify-content: center;
-    align-items: center;
+  position: absolute;
+  height: 100vh;
+  width: 100vw;
+  /* background-color: rgb(0, 0, 0); */
+  display: flex;
+  /* opacity: 50%; */
+  justify-content: center;
+  align-items: center;
 }
 
 .addWalletForm.hidden {
-    display: none;
+  display: none;
 }
 
 .currentWalletsContainer {
-    width: 80vw;
-    height: 40vh;
-    display: flex;
-    position: relative;
-    top: 20vh;
-    border: solid white;
-    flex-direction: column;
-    padding: 25px;
+  width: 80vw;
+  height: 40vh;
+  display: flex;
+  position: relative;
+  top: 20vh;
+  border: solid white;
+  flex-direction: column;
+  padding: 25px;
 }
 
 .currentWalletsContainerHeader {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    height: 10%;
-    width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: 10%;
+  width: 100%;
 }
 
-.currentWalletsContainerHeader span{
-    color: wheat;
+.currentWalletsContainerHeader span {
+  color: wheat;
 }
 
 .currentWalletsTable {
-    border: solid wheat;
-    height: 100%;
-    width: 100%;
-    color: white;
-    display: flex;
-    flex-direction: row;  
-    justify-content: space-evenly;  
-    overflow: scroll;
+  border: solid wheat;
+  height: 100%;
+  width: 100%;
+  color: white;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  overflow: scroll;
 }
-.currentWalletsTable::-webkit-scrollbar{
-    width: 5px;
-    text-decoration: none;
+.currentWalletsTable::-webkit-scrollbar {
+  width: 5px;
+  text-decoration: none;
 }
-
 
 .wallet-data-header {
-    display: flex;
-    justify-content: center;
-    /* align-content: space-evenly; */
+  display: flex;
+  justify-content: center;
+  /* align-content: space-evenly; */
 }
 .wallet-data-point {
-    display: flex;
-    justify-content: center;
+  display: flex;
+  justify-content: center;
 }
-
 
 .formContainer {
-    display: flex;
-    flex-direction: column;
-    padding: 25px;
-    padding-inline: 100px;
-    align-items: center;
-    border-radius: 15px;
-    /* border: solid white; */
-    box-shadow: 0px 0px 20px white;
-    background-color: #22A39F;
-    z-index: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 25px;
+  padding-inline: 100px;
+  align-items: center;
+  border-radius: 15px;
+  /* border: solid white; */
+  box-shadow: 0px 0px 20px white;
+  background-color: #22a39f;
+  z-index: 1;
 }
 
-.formContainerBackground {  
-    background-color: black;
-    opacity: 50%;
-    height: 100vh;
-    width: 100vw;
-    position: absolute;
-    z-index: 1;
-
+.formContainerBackground {
+  background-color: black;
+  opacity: 50%;
+  height: 100vh;
+  width: 100vw;
+  position: absolute;
+  z-index: 1;
 }
 
 .formInput {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 25vw;
-    /* border: solid wheat; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 25vw;
+  /* border: solid wheat; */
 }
 
 .formInput .btn {
-    width: 90%;
-    font-size: larger;
-    cursor: pointer;
-    text-decoration: none;
-    border: none;
-    background-color: lavender;
-    margin: 10px;
-    margin-top: 50px;
-    border-radius: 10px;
+  width: 90%;
+  font-size: larger;
+  cursor: pointer;
+  text-decoration: none;
+  border: none;
+  background-color: lavender;
+  margin: 10px;
+  margin-top: 50px;
+  border-radius: 10px;
 }
 
 .formClose {
-    position: relative;
-    cursor: pointer;
-    left: 65%;
+  position: relative;
+  cursor: pointer;
+  left: 65%;
 }
 
-
-
-.wallet-list-graphs-container{
-    
+.wallet-list-graphs-container {
 }
