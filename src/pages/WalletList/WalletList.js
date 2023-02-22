@@ -84,13 +84,13 @@ export const WalletList = () => {
           <div className="currentWalletsContainerHeader">
             <span>Wallets</span>
 
-            <button
+            <p
               onClick={() => {
                 setHidden(!hidden);
               }}
             >
               add wallet +
-            </button>
+            </p>
           </div>
 
           <div className="currentWalletsTable">
@@ -130,7 +130,7 @@ export const WalletList = () => {
                 walletValueList.map((e) => {
                   return (
                     <span key={e} className="wallet-data-point">
-                      {e}
+                      {e} USD
                     </span>
                   );
                 })}

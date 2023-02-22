@@ -6,7 +6,7 @@
   align-items: center;
   flex-direction: column;
   /* delete background color later */
-  background-color: grey;
+  /* background-color: grey; */
 }
 
 .addWalletForm {
@@ -42,9 +42,28 @@
   height: 10%;
   width: 100%;
 }
-
 .currentWalletsContainerHeader span {
-  color: wheat;
+  color: #F3EFE0;
+  font-size: 18px;
+  position: relative;
+  bottom: 4px;
+}
+.currentWalletsContainerHeader p {
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+    /* background-color: none; */
+    font-size: large;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    transition: 0.5s;
+    position: relative;
+    bottom: 20px;
+    color: #F3EFE0;
+}
+.currentWalletsContainerHeader p:hover{
+    transform: translate(0px, -5px);
+    transition: 0.5s;
 }
 
 .currentWalletsTable {
@@ -75,12 +94,15 @@
 .wallet-data-header {
   display: flex;
   justify-content: center;
+  border-bottom: solid white;
+  margin-top: 15px;
   /* align-content: space-evenly; */
 }
 .wallet-data-point {
     display: flex;
     justify-content: center;
     margin-block: 5px;
+    
 }
 
 .wallet-data-point.selected {
@@ -138,9 +160,6 @@
 
 .wallet-list-graphs-container {
   display: flex;
-
-
-
     color: white;
     position: absolute;
     bottom: 55vh;
