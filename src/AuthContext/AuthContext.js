@@ -24,7 +24,6 @@ export function useAuth() {
 
 const AuthProvider = ({children}) => {
     // console.log("sassy lost child",children)
-    console.log("loggedIn",loggedIn)
     const [ { headers, isAuth, loggedUser } , setAuthState] = useState(loggedIn === null ? authState : loggedIn)
 
     useEffect(() => {

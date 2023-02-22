@@ -17,12 +17,12 @@ export default function Dashboard() {
 
   const navigate = useNavigate();
   const { isAuth } = useAuth;
-  // useEffect(() => {
-  //   console.log("isauth", isAuth);
-  //   if (isAuth !== true) {
-  //     navigate("/");
-  //   }
-  // }, []);
+
+  useEffect(() => {
+    if (isAuth !== true) {
+      navigate("/");
+    }
+  }, [isAuth]);
 
   async function getWalletData() {
     try {
