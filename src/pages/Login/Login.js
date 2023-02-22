@@ -17,10 +17,20 @@ export default function Login(props) {
     e.preventDefault()
     // api call to login
     userLogin(email,password)
+      .then((res)=>{
+        console.log("res",res)
+        if(res === undefined){
+          throw ("")
+        }
+      })
       .then(setAuthState)
       .then(()=>{
         navigate("/dashboard")
         props.onChildEvent("toDashboardPageView")
+      })
+      .catch((err)=>{
+        console.log(err)
+        alert("wrong login info")
       })
   }
 
