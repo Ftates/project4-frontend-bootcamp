@@ -17,8 +17,6 @@ import Dashboard from "./pages/Dashboard/Dashboard.js";
 import { WalletList } from "./pages/WalletList/WalletList.js";
 import Transactions from "./pages/Transaction Log/Transaction";
 
-// console.log("authprovider",AuthProvider)
-
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
 let animationMap = {};
@@ -56,7 +54,7 @@ const handleAnimationEvent = (route) => {
   if (route === "word4View") animationMap.animateMeshToScrollView4();
   if (route === "word5View") animationMap.animateMeshToScrollView5();
   else {
-    console.log("check handleAnimationEvent func on index.js route:", route);
+    // console.log("check handleAnimationEvent func on index.js route:", route);
   }
 };
 
@@ -75,7 +73,7 @@ const useNavigateMap = (route) => {
 root.render(
   // <React.StrictMode>
   <>
-    {
+    {/* {
       <MainPageCanvas
         onChildEvent={retrieveAnimationEvent}
         onChildEvent2={retrieveToggleDisplay}
@@ -83,7 +81,7 @@ root.render(
           useNavigateMap(e);
         }}
       />
-    }
+    } */}
     <BrowserRouter>
       <AuthProvider>
         <Routes>

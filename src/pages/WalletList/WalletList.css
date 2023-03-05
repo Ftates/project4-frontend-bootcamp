@@ -6,7 +6,7 @@
   align-items: center;
   flex-direction: column;
   /* delete background color later */
-  /* background-color: grey; */
+  background-color: #393e46;
 }
 
 .addWalletForm {
@@ -43,27 +43,27 @@
   width: 100%;
 }
 .currentWalletsContainerHeader span {
-  color: #F3EFE0;
+  color: #f3efe0;
   font-size: 18px;
   position: relative;
   bottom: 4px;
 }
 .currentWalletsContainerHeader p {
-    text-decoration: none;
-    cursor: pointer;
-    border: none;
-    /* background-color: none; */
-    font-size: large;
-    margin-bottom: 10px;
-    border-radius: 10px;
-    transition: 0.5s;
-    position: relative;
-    bottom: 20px;
-    color: #F3EFE0;
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+  /* background-color: none; */
+  font-size: large;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  transition: 0.5s;
+  position: relative;
+  bottom: 20px;
+  color: #f3efe0;
 }
-.currentWalletsContainerHeader p:hover{
-    transform: translate(0px, -5px);
-    transition: 0.5s;
+.currentWalletsContainerHeader p:hover {
+  transform: translate(0px, -5px);
+  transition: 0.5s;
 }
 
 .currentWalletsTable {
@@ -82,13 +82,13 @@
 }
 
 .add-wallet-button {
-    text-decoration: none;
-    border: none;
-    border-radius: 15px;
-    margin-bottom: 7.5px;
+  text-decoration: none;
+  border: none;
+  border-radius: 15px;
+  margin-bottom: 7.5px;
 }
 .add-wallet-button:hover {
-    background-color: rgb(175, 174, 174);
+  background-color: rgb(175, 174, 174);
 }
 
 .wallet-data-header {
@@ -99,14 +99,13 @@
   /* align-content: space-evenly; */
 }
 .wallet-data-point {
-    display: flex;
-    justify-content: center;
-    margin-block: 5px;
-    
+  display: flex;
+  justify-content: center;
+  margin-block: 5px;
 }
 
 .wallet-data-point.selected {
-    background-color: #22A39F;
+  background-color: #22a39f;
 }
 
 .formContainer {
@@ -157,10 +156,9 @@
   left: 65%;
 }
 
-
 .wallet-list-graphs-container {
   display: flex;
-    color: white;
-    position: absolute;
-    bottom: 55vh;
+  color: white;
+  position: absolute;
+  bottom: 55vh;
 }

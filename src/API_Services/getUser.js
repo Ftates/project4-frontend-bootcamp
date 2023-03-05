@@ -7,14 +7,14 @@ async function getUser({ headers }) {
       headers,
       url: "http://localhost:3001/users/test",
     });
-    if(data.success === false){
-      throw(data)
+    if (data.success === false) {
+      throw data;
     }
 
     return data.user;
   } catch (error) {
-    console.log("Catchi!",error)
-    return error
+    console.error(error);
+
     // errorHandler(error);
   }
 }

@@ -43,20 +43,6 @@ export default function Dashboard() {
     }
   }
 
-  // async function formatTransaction(userId) {
-  //   const data = await getAllTransactions(userId);
-  //   console.log(data);
-
-  //   if (data.length < 5) {
-  //     setTxn(data);
-  //     return;
-  //   } else {
-  //     const latestFive = data[-5];
-  //     console.log(latestFive);
-  //     setTxn(latestFive);
-  //   }
-  // }
-
   useEffect(() => {
     getPortfolio();
     getAllWallet(loggedUser.id).then((response) => setWalletList(response));

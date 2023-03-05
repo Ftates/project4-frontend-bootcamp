@@ -7,6 +7,7 @@
   flex-direction: row;
   align-items: center;
   color: red;
+  background-color: grey;
 }
 
 .table {
@@ -29,7 +30,7 @@
   width: 50%;
   height: 60px;
 }
-.add-transaction-button-box{
+.add-transaction-button-box {
   width: 100%;
   display: flex;
   justify-content: center;

@@ -3,6 +3,7 @@ import "./WalletList.css";
 import AddWalletForm from "./AddWalletForm";
 import getAllWallet from "../../API_Services/getAllWallet";
 import getWalletValue from "../../API_Services/getWalletValue";
+import getAllWalletData from "../../API_Services/getAllWalletData";
 import { useAuth } from "../../AuthContext/AuthContext";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -19,53 +20,46 @@ export const WalletList = () => {
   const [walletValueList, setWalletValueList] = useState([]);
   const [walletListHoldings, setWalletListHoldings] = useState([]);
   const [chartData, setChartData] = useState([]);
+  const [test, setTest] = useState([]);
 
   useEffect(() => {
     if (isAuth !== true) {
       navigate("/");
     }
-
-    async function retrieveWallets() {
-      let arr = await getAllWallet(loggedUser.id);
-      setWalletList(arr);
+    async function retrieveAllWalletInfo() {
+      const result = await getAllWalletData(loggedUser.id);
+      console.log("result: ", result.data);
+      setTest(result.data);
     }
 
-    retrieveWallets();
+    retrieveAllWalletInfo();
   }, [isAuth]);
 
   useEffect(() => {
-    // console.log("BEFORE wallet list: ", walletList);
+    function test2(array) {
+      const wl = [];
+      const wlh = [];
+      for (let i = 0; i < array.length; i++) {
+        wl.push(array[i]["wallet"]);
+        wlh.push(array[i]["formatTxn"]);
+      }
+      console.log("WL", wl);
+      console.log("WLH", wlh);
+      setWalletList(wl);
+      setWalletListHoldings(wlh);
+    }
 
-    const retrieveData = async () => {
-      const values = await Promise.all(
-        walletList.map(async (e) => {
-          const res = await getWalletValue(e.id, loggedUser.id);
-          // console.log("Response:", res);
-
-          return res;
-        })
-      );
-
-      setWalletListHoldings(values);
-    };
-    retrieveData();
-  }, [walletList]);
+    test2(test);
+  }, [test]);
 
   useEffect(() => {
-    // console.log("WALLET LIST", walletList);
-    // console.log("Wallet List HOLDINGS: ", walletListHoldings);
     const totalValue = formatWalletValue(walletListHoldings);
     setWalletValueList(totalValue);
     const data = formatWalletChartData(walletList, walletListHoldings);
     setChartData(data);
   }, [walletListHoldings]);
 
-  useEffect(() => {
-    // console.log("WALLET LIST: ", walletList);
-    // console.log("WALLET VALUE LIST: ", walletValueList);
-    // console.log("WALLET LIST HOLDINGS: ", walletListHoldings);
-    // console.log("CHART DATA: ", chartData);
-  }, [walletValueList]);
+  useEffect(() => {}, [walletValueList]);
 
   return (
     <>
@@ -76,7 +70,10 @@ export const WalletList = () => {
 
         <div className="wallet-list-graphs-container">
           {chartData.map((walletData) => (
-            <DoughnutChart key={walletData["name"]} chartData={walletData} />
+            <DoughnutChart
+              key={chartData.indexOf(walletData)}
+              chartData={walletData}
+            />
           ))}
         </div>
 

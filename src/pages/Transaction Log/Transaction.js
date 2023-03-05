@@ -24,7 +24,6 @@ import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../AuthContext/AuthContext";
 
-
 export default function Transactions() {
   const [open, setOpen] = useState(false);
   const [date, setDate] = useState("");
@@ -39,10 +38,8 @@ export default function Transactions() {
 
   const [userWallets, setUserWallets] = useState([]);
 
-
   const navigate = useNavigate();
   const { isAuth, loggedUser } = useAuth();
-
 
   async function getUserWallet() {
     const response = await axios.get(
@@ -50,6 +47,7 @@ export default function Transactions() {
       { params: { user_id: loggedUser.id } }
     );
     const data = response.data.wallets;
+    console.log("User wallet data: ", data);
     setUserWallets(data);
   }
 
@@ -59,7 +57,7 @@ export default function Transactions() {
       { params: { user_id: loggedUser.id } }
     );
     setUserTxns(response.data.data);
-    console.log(response.data);
+    console.log("User txn data: ", response.data.data);
   }
 
   useEffect(() => {
@@ -72,10 +70,19 @@ export default function Transactions() {
   };
 
   const handleClose = () => {
+    resetFormState();
     setOpen(false);
   };
 
-  const [test, setTest] = useState({});
+  const resetFormState = () => {
+    setDate("");
+    setWallet("");
+    setWalletId(null);
+    setCoin("");
+    setType("");
+    setQuantity(0);
+    setPrice(0);
+  };
 
   const handleChangeForm = (e) => {
     if (e.target.name === "wallet") {
@@ -95,7 +102,6 @@ export default function Transactions() {
 
   function getPayload(wallet_id, date, wallet, coin, type, quantity, price) {
     const foo = {
-
       user_id: loggedUser.id,
       wallet_id: wallet_id,
       date: date,
@@ -110,6 +116,8 @@ export default function Transactions() {
   }
 
   const handleSubmitForm = async (e) => {
+    e.preventDefault();
+
     if (date && wallet && coin && type && quantity && price) {
       const payload = getPayload(
         wallet_id,
@@ -122,43 +130,34 @@ export default function Transactions() {
       );
 
       try {
-        const checkIfCoinIsSupported = await axios.get("http://localhost:3001/coinlist/getCoinId", {
-          params: {coin: coin}
-        })
-        console.log("SANITY CHECK", checkIfCoinIsSupported)
-        if (checkIfCoinIsSupported.data.success === true){
+        const checkIfCoinIsSupported = await axios.get(
+          "http://localhost:3001/coinlist/getCoinId",
+          {
+            params: { coin: coin },
+          }
+        );
+
+        if (checkIfCoinIsSupported.data.success) {
           const addTxn = await axios.post(
             "http://localhost:3001/transactions/addTransaction",
             payload
           );
+          getUserTransaction();
         } else {
           // insert error message here
-          alert("coin not supported")
+          alert("coin not supported");
         }
-
-        
-      } catch (err) {
-        console.log(err);
+      } catch (error) {
+        console.error(error);
       }
     }
-
-    setDate("");
-    setWallet("");
-    setWalletId(null);
-    setCoin("");
-    setType("");
-    setQuantity(0);
-    setPrice(0);
-
+    resetFormState();
     setOpen(false);
-    navigate("/transactions")
   };
 
   return (
     <div className="Screen">
       <div>
-        
-
         <Dialog maxWidth={"lg"} open={open} onClose={handleClose}>
           <DialogTitle>Add Transaction</DialogTitle>
 
@@ -270,12 +269,15 @@ export default function Transactions() {
         <TransactionTable data={userTxns} />
 
         <div className="add-transaction-button-box">
-          <Button variant="contained" onClick={handleClickOpen} className='add-transaction-button'>
+          <Button
+            variant="contained"
+            onClick={handleClickOpen}
+            className="add-transaction-button"
+          >
             + New Transaction
           </Button>
         </div>
       </div>
-      
     </div>
   );
 }
