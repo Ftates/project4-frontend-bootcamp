@@ -25,7 +25,7 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../AuthContext/AuthContext";
 
 
-export default function Transactions() {
+export default function Transactions(props) {
   const [open, setOpen] = useState(false);
   const [date, setDate] = useState("");
   const [wallet, setWallet] = useState("");
@@ -66,6 +66,12 @@ export default function Transactions() {
     getUserWallet();
     getUserTransaction();
   }, []);
+
+  useEffect(() => {
+    setTimeout(()=>{
+      props.onChildEvent("toDashboardPageView")
+    },100)
+  })
 
   const handleClickOpen = () => {
     setOpen(true);

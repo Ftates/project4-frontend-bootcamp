@@ -22,15 +22,19 @@ export default function Login(props) {
         if(res === undefined){
           throw ("")
         }
+        else {
+          return res
+        }
       })
       .then(setAuthState)
       .then(()=>{
+        setErrorMessage("")
         navigate("/dashboard")
         props.onChildEvent("toDashboardPageView")
       })
       .catch((err)=>{
         console.log(err)
-        alert("wrong login info")
+        setErrorMessage("Invalid login information")
       })
   }
 
@@ -38,7 +42,7 @@ export default function Login(props) {
   return (
     <>
       <div className="Screen">
-        {errorMessage === "" ? <span></span> : <span>{`${errorMessage}`}</span>}
+        
         <form onSubmit={(e)=>{handleSubmit(e)}}>
           <div className="formContainer">
             <h1 className="formContainerLabel">Login</h1>
@@ -63,10 +67,13 @@ export default function Login(props) {
                 />
               <button className="btn">Login</button>
             </div>
-            
+            {errorMessage === "" ? <span></span> : <span className="error-message">{`${errorMessage}`}</span>}
           </div>
+
           
         </form>
+
+        
       </div>
       
     </>

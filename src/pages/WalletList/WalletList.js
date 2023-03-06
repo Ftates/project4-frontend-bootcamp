@@ -11,7 +11,7 @@ import DoughnutChart from "../../components/Doughnut.js";
 import formatWalletValue from "../../helpers/formatWalletValue";
 import formatWalletChartData from "../../helpers/formatWalletChartData";
 
-export const WalletList = () => {
+export const WalletList = (props) => {
   const { loggedUser, isAuth } = useAuth();
   const navigate = useNavigate();
   const [hidden, setHidden] = useState(true);
@@ -32,6 +32,12 @@ export const WalletList = () => {
 
     retrieveWallets();
   }, [isAuth]);
+
+  useEffect(() => {
+    setTimeout(()=>{
+      props.onChildEvent("toDashboardPageView")
+    },100)
+  })
 
   useEffect(() => {
     // console.log("BEFORE wallet list: ", walletList);

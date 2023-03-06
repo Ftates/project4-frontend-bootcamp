@@ -30,7 +30,7 @@
   display: flex;
   position: relative;
   top: 20vh;
-  border: solid white;
+  border: none;
   flex-direction: column;
   padding: 25px;
 }

@@ -9,6 +9,7 @@ export const Register = (props) => {
   const [name, setName] = useState()
   const [email, setEmail] = useState()
   const [password, setPassword] = useState()
+  const [errorMessage, setErrorMessage] = useState("")
 
   // this one
   const { setAuthState } = useAuth();
@@ -24,14 +25,24 @@ export const Register = (props) => {
     console.log("wtf is setauthstate:",setAuthState)
     // userRegister is an axios call to backend
     userRegister(name, email, password)
+      .then((res)=>{
+        console.log("res",res)
+        if(res === undefined){
+          throw ("")
+        }
+        else{
+          return res
+        }
+      })
     //userRegister must return an object that can be passed into setAuthState in the correct format so it can destucture properly and not die
       .then(setAuthState)
       .then(()=>{
+        setErrorMessage("")
         navigate("/dashboard")
         props.onChildEvent("toDashboardPageView")
       })
       .then(console.log("done"))
-      .catch((err)=>{console.log("WORLD CLASS CATCH!",err)})
+      .catch(setErrorMessage("Email already in use"))
   }
 
   return (
@@ -66,6 +77,8 @@ export const Register = (props) => {
                     onChange={(e)=>{setPassword(e.target.value)}}/>
                   <button className='btn'>Register</button>
                 </div>
+                {errorMessage === "" ? <span></span> : <span className="error-message">{`${errorMessage}`}</span>}
+
               </div>
             </form>
         </div>

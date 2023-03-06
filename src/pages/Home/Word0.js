@@ -163,7 +163,7 @@ export const Word0 = (props) => {
               <header>Motivation</header>
               <ul>
                 <li>Try out new technologies and create what we tried to but couldn't in project 1</li>
-                <li>Common interest in crypto (dont say it foong)</li>
+                <li>Common interest in crypto</li>
               </ul>
               <div>
                 <h3>The Problem:</h3>

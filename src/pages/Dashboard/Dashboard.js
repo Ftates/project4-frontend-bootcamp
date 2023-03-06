@@ -15,7 +15,7 @@ import getAllWallet from "../../API_Services/getAllWallet";
 import getWalletValue from "../../API_Services/getWalletValue";
 import getAllTransactions from "../../API_Services/getAllTransaction";
 
-export default function Dashboard() {
+export default function Dashboard(props) {
   const navigate = useNavigate();
   const { isAuth, loggedUser } = useAuth();
   const [portfolio, setPortfolio] = useState([]);
@@ -27,8 +27,14 @@ export default function Dashboard() {
   useEffect(() => {
     if (isAuth !== true) {
       navigate("/");
-    }
+    } 
   }, [isAuth]);
+
+  useEffect(() => {
+    setTimeout(()=>{
+      props.onChildEvent("toDashboardPageView")
+    },100)
+  })
 
   async function getPortfolio() {
     try {
@@ -155,7 +161,7 @@ export default function Dashboard() {
   }, []);
 
   return (
-    <div className="Screen">
+    <div className="Screen disable-scroll">
       <div className="dashboard">
         <div className="header">
           <div className="item1">
