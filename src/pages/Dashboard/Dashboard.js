@@ -6,14 +6,18 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../AuthContext/AuthContext";
 import "./Dashboard.css";
 import dateFormat from "../../helpers/dateFormat";
+import formatAllHoldings from "../../helpers/formatAllHoldings";
+import costBasis from "../../helpers/costBasis";
 
 import LineChart from "../../components/LineChart";
 import DoughnutChart from "./Doughnut-Dashboard";
 import LatestTransaction from "../Dashboard/LatestTransaction";
+import OverviewTable from "./OverviewTable";
 
 import getAllWallet from "../../API_Services/getAllWallet";
 import getWalletValue from "../../API_Services/getWalletValue";
 import getAllTransactions from "../../API_Services/getAllTransaction";
+import getAllWalletData from "../../API_Services/getAllWalletData";
 
 export default function Dashboard() {
   const navigate = useNavigate();
@@ -21,75 +25,51 @@ export default function Dashboard() {
   const [portfolio, setPortfolio] = useState([]);
   const [portfolioGrowth, setPortfolioGrowth] = useState([]);
   const [walletList, setWalletList] = useState([]);
-  const [overviewData, setOverviewData] = useState([]);
-  const [txn, setTxn] = useState([]);
+  const [data, setData] = useState([]);
 
   useEffect(() => {
     if (isAuth !== true) {
       navigate("/");
     }
+    getAllWalletData(loggedUser.id).then((response) => setData(response.data));
   }, [isAuth]);
 
-  async function getPortfolio() {
-    try {
-      const response = await axios.get(
-        "http://localhost:3001/wallets/getPortfolio",
-        { params: { user_id: loggedUser.id } }
-      );
-      const data = response.data.data;
-      setPortfolio(data);
-    } catch (error) {
-      console.log(error);
+  useEffect(() => {
+    console.log("DATA: ", data);
+  }, [data]);
+
+  const [alltxn, setAllTxn] = useState([]);
+  const [formattxn, setFormatTxn] = useState([]);
+  const [overview, setOverview] = useState([]);
+
+  function formatTransaction(array) {
+    // array = [{wallet: wallet1, alltxn: [{txn1,txn2,...}] , formatTxn: [{coin1}, {coin2}, ...]}]
+    const txn_array = [];
+    const formattxn_array = [];
+
+    for (let i = 0; i < array.length; i++) {
+      txn_array.push(...array[i]["alltxn"]);
+      formattxn_array.push(...array[i]["formatTxn"]);
     }
+
+    console.log("txn_array", txn_array);
+    console.log("formattxn_array", formattxn_array);
+
+    setAllTxn(txn_array);
+    setFormatTxn(formattxn_array);
   }
 
   useEffect(() => {
-    getPortfolio();
-    getAllWallet(loggedUser.id).then((response) => setWalletList(response));
-  }, []);
+    formatTransaction(data);
+  }, [data]);
 
   useEffect(() => {
-    getAllTransactions(loggedUser.id).then((response) => {
-      const data = response.data;
-      if (data.length <= 5) {
-        setTxn(data);
-      } else {
-        setTxn(data.slice(-5));
-      }
-    });
-  }, []);
+    setPortfolio(formatAllHoldings(formattxn));
+  }, [formattxn]);
 
   useEffect(() => {
-    console.log(txn);
-  }, [txn]);
-
-  /// TOUCH UP AGAIN AFTER PRESENTATION ///
-  // useEffect(() => {
-  //   formatWalletData(walletList, loggedUser.id);
-  // }, []);
-
-  // async function formatWalletData(walletList, userID) {
-  //   const array = [];
-  //   for (let i = 0; i < walletList.length; i++) {
-  //     const walletID = walletList[i].id;
-  //     const walletName = walletList[i].name;
-
-  //     const data = await getWalletValue(walletID, userID);
-  //     const element = {
-  //       walletID: walletID,
-  //       walletName: walletName,
-  //       data: data,
-  //     };
-
-  //     array.push(element);
-  //   }
-
-  //   setOverviewData(array);
-  // }
-
-  // useEffect(() => {
-  //   console.log("Overview DATA HERE", overviewData);
-  // }, [overviewData]);
+    setOverview(costBasis(alltxn, portfolio));
+  }, [portfolio]);
 
   function createChartData(input) {
     if (!input || input.length === 0) {
@@ -115,6 +95,7 @@ export default function Dashboard() {
         "http://localhost:3001/portfolio/getPortfolioGrowth",
         { params: { user_id: loggedUser.id } }
       );
+      console.log("Response: ", response);
       const data = response.data; // array
       data.forEach((element) => {
         const dayId = element.days;
@@ -128,9 +109,9 @@ export default function Dashboard() {
         growth.push(payload);
       });
       const inputData = createChartData(growth);
-      // console.log("Input data", inputData);
+      console.log("Input data ", inputData);
       setPortfolioGrowth(inputData);
-      // console.log(portfolioGrowth);
+      console.log("Portfolio Growth ", portfolioGrowth);
     } catch (err) {
       console.log(err);
     }
@@ -145,7 +126,7 @@ export default function Dashboard() {
       <div className="dashboard">
         <div className="header">
           <div className="item1">
-            Portfolio Value
+            Performance
             {portfolioGrowth !== [] ? (
               <LineChart chartData={portfolioGrowth} />
             ) : null}
@@ -156,7 +137,8 @@ export default function Dashboard() {
           </div>
         </div>
         <div className="overview">
-          <LatestTransaction data={txn} />
+          Overview
+          <OverviewTable data={overview} />
         </div>
       </div>
     </div>

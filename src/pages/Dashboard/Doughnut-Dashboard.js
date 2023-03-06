@@ -7,11 +7,29 @@ function DoughnutChart({ chartData }) {
   const [coin, setCoin] = useState(null);
 
   const wallet = chartData;
-  // const wallet = [
-  //   { coin: "USD", amt: 1000, value: 1000 },
-  //   { coin: "ETH", amt: 2.5, value: 3000 },
-  //   { coin: "BTC", amt: 1, value: 25000 },
-  // ];
+
+  let defaultColors = [
+    "#3366CC",
+    "#DC3912",
+    "#FF9900",
+    "#109618",
+    "#990099",
+    "#3B3EAC",
+    "#0099C6",
+    "#DD4477",
+    "#66AA00",
+    "#B82E2E",
+    "#316395",
+    "#994499",
+    "#22AA99",
+    "#AAAA11",
+    "#6633CC",
+    "#E67300",
+    "#8B0707",
+    "#329262",
+    "#5574A6",
+    "#651067",
+  ];
 
   const data = {
     labels: wallet.map((data) => data.coin),
@@ -19,34 +37,15 @@ function DoughnutChart({ chartData }) {
       {
         label: "Cold wallet",
         data: wallet.map((data) => data.value),
-        backgroundColor: [
-          "rgb(255, 99, 132)",
-          "rgb(54, 162, 235)",
-          "rgb(255, 205, 86)",
-        ],
-
+        backgroundColor: defaultColors,
         borderColor: "#434242",
       },
     ],
   };
 
-  // const options = {
-  //   onHover: (e, wallet) => {
-  //     if (wallet.length > 0) {
-  //       const index = wallet[0].index;
-  //       const amount = data.datasets[0].data[index];
-  //       setValue(amount);
-  //       setCoin(data.labels[index]);
-  //     } else {
-  //       setValue(null);
-  //       setCoin(null);
-  //     }
-  //   },
-  // };
-
   return (
     <div>
-      <div>{value && `${coin} and $${value}`}</div>
+      {/* <div>{value && `${coin} and $${value}`}</div> */}
       <Doughnut data={data} chart={ChartJS} />
     </div>
   );
