@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Doughnut } from "react-chartjs-2";
 import ChartJS from "chart.js/auto";
+import "./Doughnut.css";
 
 function DoughnutChart({ chartData }) {
   const [value, setValue] = useState(null);
@@ -67,10 +68,9 @@ function DoughnutChart({ chartData }) {
   };
 
   return (
-    <div>
-      <div>{value && `${coin} and $${value}`}</div>
+    <div className="circle">
       <Doughnut data={data} options={options} chart={ChartJS} />
-      <span>{name}</span>
+      <span className="WalletName">{name}</span>
     </div>
   );
 }

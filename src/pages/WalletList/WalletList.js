@@ -22,21 +22,22 @@ export const WalletList = () => {
   const [chartData, setChartData] = useState([]);
   const [test, setTest] = useState([]);
 
+  async function retrieveAllWalletInfo() {
+    const result = await getAllWalletData(loggedUser.id);
+    console.log("result: ", result.data);
+    setTest(result.data);
+  }
+
   useEffect(() => {
     if (isAuth !== true) {
       navigate("/");
-    }
-    async function retrieveAllWalletInfo() {
-      const result = await getAllWalletData(loggedUser.id);
-      console.log("result: ", result.data);
-      setTest(result.data);
     }
 
     retrieveAllWalletInfo();
   }, [isAuth]);
 
   useEffect(() => {
-    function test2(array) {
+    function setData(array) {
       const wl = [];
       const wlh = [];
       for (let i = 0; i < array.length; i++) {
@@ -49,7 +50,7 @@ export const WalletList = () => {
       setWalletListHoldings(wlh);
     }
 
-    test2(test);
+    setData(test);
   }, [test]);
 
   useEffect(() => {
@@ -65,7 +66,10 @@ export const WalletList = () => {
     <>
       <div className="ScreenWalletList">
         <div className={`addWalletForm ${hidden === true ? "hidden" : ""}`}>
-          <AddWalletForm onChildEvent={setHidden} />
+          <AddWalletForm
+            onChildEvent={setHidden}
+            refreshWallet={retrieveAllWalletInfo}
+          />
         </div>
 
         <div className="wallet-list-graphs-container">

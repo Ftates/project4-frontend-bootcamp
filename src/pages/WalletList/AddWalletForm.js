@@ -6,7 +6,6 @@ import { useNavigate } from "react-router-dom";
 import { WalletList } from "./WalletList.js";
 
 const AddWalletForm = (props) => {
-  //   console.log("Props: ", props);
   const { loggedUser } = useAuth();
   const navigate = useNavigate();
 
@@ -19,10 +18,7 @@ const AddWalletForm = (props) => {
     console.log("submit", walletName, walletAddress, walletType);
     addWallet(walletName, walletAddress, walletType, loggedUser.id).then(() => {
       props.onChildEvent(true);
-      //   console.log("reach here?");
-
-      //   console.log("reach here 2nd?");
-      //   console.log(props.walletList);
+      props.refreshWallet();
     });
   };
 
