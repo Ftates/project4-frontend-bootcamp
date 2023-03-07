@@ -167,9 +167,9 @@ export const Word0 = (props) => {
               </ul>
               <div>
                 <h3>The Problem:</h3>
-                <span>Crypto portfolio management is tedious as it requires monitoring multiple wallets and coins and recording different transactions which can be time-consuming and difficult to manage.</span>
+                <span>Crypto portfolio management is tedious as it requires monitoring multiple wallets across different blockchains and coins and recording different transactions which can be time-consuming to manage and difficult to remember all your wallets.</span>
                 <h3>The Solution:</h3>
-                <span>KoinFu is a portfolio tracker for cryptocurrencies that allow users to log their trades and track their portfolio across multiple wallets</span>
+                <span>KoinFu is a portfolio tracker for cryptocurrencies that allow users to log their trades and track their portfolio across multiple wallets across different blockchains</span>
               </div>
             </div>
           </div>
@@ -198,7 +198,6 @@ export const Word0 = (props) => {
                 </div>
               </div>
             </div>
-
           </div>
 
           <div key={"page2"} className={`PageContainer ${page2hidden ? "hidden" : ""}`}>
@@ -207,10 +206,10 @@ export const Word0 = (props) => {
               <header>Key Features</header>
               <div>
                 <ul>
-                  <li>Record transaction history</li>
-                  <li>Track multiple wallets and their current value</li>
+                  <li>Record transaction history of each individual wallet</li>
+                  <li>Track multiple wallets across different chains and their current value</li>
                   <li>View your assets distribution in different wallets</li>
-                  <li>Monitor your portfolio growth over time</li>
+                  <li>Chart that updates daily to monitor your portfolio growth over time</li>
                 </ul>
               </div>
             </div>
@@ -236,7 +235,7 @@ export const Word0 = (props) => {
               <header>Possible Improvements</header>
               <div>
                 <ul>
-                  <li>Lack of validation and error handling</li>
+                  <li>Potential to add API calls to automatically retrieve transaction information of a specific wallet address directly from the blockchain to remove the need to manually add every transcation to be tracked</li>
                   <li>Aesthetics/Animations</li>
                   <li>Efficiency in API calls</li>
                 </ul>
@@ -253,9 +252,7 @@ export const Word0 = (props) => {
                   <li>Working with 3rd party API - limited calls</li>
                   <li>Some API calls are dependent on each other, making debugging difficult</li>
                   <li>Managing states and chartJS interactivity</li>
-                  <li>Hard to come up with a wireframe/design for website</li>
-                  <li>Threejs light rendering does not obey the laws of physics</li>
-                  <li>Camera angles during animations</li>
+                  <li>Threejs animations are hard to get right</li>
                 </ul>
               </div>
             </div>
