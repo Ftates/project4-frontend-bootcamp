@@ -43,12 +43,6 @@ export const WalletList = (props) => {
   });
 
   useEffect(() => {
-    setTimeout(() => {
-      props.onChildEvent("toDashboardPageView");
-    }, 100);
-  });
-
-  useEffect(() => {
     function setData(array) {
       const wl = [];
       const wlh = [];

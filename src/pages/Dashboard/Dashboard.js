@@ -41,12 +41,6 @@ export default function Dashboard(props) {
   });
 
   useEffect(() => {
-    setTimeout(() => {
-      props.onChildEvent("toDashboardPageView");
-    }, 100);
-  });
-
-  useEffect(() => {
     console.log("DATA: ", data);
   }, [data]);
 
