@@ -19,7 +19,7 @@ import getWalletValue from "../../API_Services/getWalletValue";
 import getAllTransactions from "../../API_Services/getAllTransaction";
 import getAllWalletData from "../../API_Services/getAllWalletData";
 
-export default function Dashboard() {
+export default function Dashboard(props) {
   const navigate = useNavigate();
   const { isAuth, loggedUser } = useAuth();
   const [portfolio, setPortfolio] = useState([]);
@@ -33,6 +33,18 @@ export default function Dashboard() {
     }
     getAllWalletData(loggedUser.id).then((response) => setData(response.data));
   }, [isAuth]);
+
+  useEffect(() => {
+    setTimeout(() => {
+      props.onChildEvent("toDashboardPageView");
+    }, 100);
+  });
+
+  useEffect(() => {
+    setTimeout(() => {
+      props.onChildEvent("toDashboardPageView");
+    }, 100);
+  });
 
   useEffect(() => {
     console.log("DATA: ", data);
@@ -122,7 +134,7 @@ export default function Dashboard() {
   }, []);
 
   return (
-    <div className="Screen">
+    <div className="Screen disable-scroll">
       <div className="dashboard">
         <div className="header">
           <div className="item1">

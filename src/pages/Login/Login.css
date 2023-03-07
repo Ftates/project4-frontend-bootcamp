@@ -4,6 +4,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
 }
 
 .formContainer {
@@ -51,4 +52,8 @@
     font-size: large;
     background-color: black;
     color: white;
+}
+
+.error-message {
+    color: #bf1b1b;
 }

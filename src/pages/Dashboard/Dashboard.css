@@ -5,6 +5,7 @@
   font-size: 25px;
   justify-content: center;
   align-items: center;
+  overflow: scroll;
 }
 
 .Screen .dashboard {
@@ -86,4 +87,8 @@
 
 ::-webkit-scrollbar {
   display: none;
+}
+
+.disable-scroll {
+  overflow: hidden;
 }

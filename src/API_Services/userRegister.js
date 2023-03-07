@@ -24,7 +24,7 @@ const userRegister = async ( name, email, password ) => {
         return loggedIn
     } catch (error) {
         console.log("Catch!",error)
-        return error
+        // return error
         // errorHandler(error)
     }
 }

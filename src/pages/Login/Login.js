@@ -16,30 +16,29 @@ export default function Login(props) {
     e.preventDefault();
     // api call to login
     userLogin(email, password)
-      // .then((res) => {
-      //   console.log("res", res);
-      //   if (res === undefined) {
-      //     throw "";
-      //   }
-      //   console.log(headers);
-      //   console.log(isAuth);
-      //   console.log(loggedUser);
-      // })
+      .then((res) => {
+        console.log("res", res);
+        if (res === undefined) {
+          throw "";
+        } else {
+          return res;
+        }
+      })
       .then(setAuthState)
       .then(() => {
+        setErrorMessage("");
         navigate("/dashboard");
         props.onChildEvent("toDashboardPageView");
       })
       .catch((err) => {
-        console.error(err);
-        alert("wrong login info");
+        console.log(err);
+        setErrorMessage("Invalid login information");
       });
   };
 
   return (
     <>
       <div className="Screen">
-        {errorMessage === "" ? <span></span> : <span>{`${errorMessage}`}</span>}
         <form
           onSubmit={(e) => {
             handleSubmit(e);
@@ -72,6 +71,11 @@ export default function Login(props) {
               />
               <button className="btn">Login</button>
             </div>
+            {errorMessage === "" ? (
+              <span></span>
+            ) : (
+              <span className="error-message">{`${errorMessage}`}</span>
+            )}
           </div>
         </form>
       </div>

@@ -43,8 +43,7 @@ const retrieveToggleDisplay = (func) => {
 const handleAnimationEvent = (route) => {
   // console.log("alivent check")
   if (route === "toHomePageView") animationMap.animateMeshtoHomePageView();
-  if (route === "toDashboardPageView")
-    animationMap.animateMeshtoDashboardPageView();
+  if (route === "toDashboardPageView")animationMap.animateMeshtoDashboardPageView();
   if (route === "toLearnMoreView") animationMap.animateMeshToLearnMoreView();
   if (route === "toLearnMoreView2") animationMap.animateMeshToLearnMoreView2();
   if (route === "word0View") animationMap.animateMeshToScrollView();
@@ -120,9 +119,9 @@ root.render(
                 <Register onChildEvent={(e) => handleAnimationEvent(e)} />
               }
             />
-            <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/walletList" element={<WalletList />} />
-            <Route path="/transactions" element={<Transactions />} />
+            <Route path="/dashboard" element={<Dashboard onChildEvent={(e)=> handleAnimationEvent(e)}/>} />
+            <Route path="/walletList" element={<WalletList onChildEvent={(e)=> handleAnimationEvent(e)}/>} />
+            <Route path="/transactions" element={<Transactions onChildEvent={(e)=> handleAnimationEvent(e)}/>} />
           </Route>
         </Routes>
       </AuthProvider>
