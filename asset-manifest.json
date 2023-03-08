@@ -1,16 +1,16 @@
 {
   "files": {
     "main.css": "/project4-frontend-bootcamp/static/css/main.6037c37f.css",
-    "main.js": "/project4-frontend-bootcamp/static/js/main.029dc1e9.js",
+    "main.js": "/project4-frontend-bootcamp/static/js/main.7dc3063c.js",
     "static/media/Bitcoin.glb": "/project4-frontend-bootcamp/static/media/Bitcoin.c618f8f48685d727e725.glb",
     "static/media/Coinwords.glb": "/project4-frontend-bootcamp/static/media/Coinwords.abf14bed84a523b2f3b7.glb",
     "static/media/CoinDashboard.glb": "/project4-frontend-bootcamp/static/media/CoinDashboard.f578c094643a0d89ba84.glb",
     "index.html": "/project4-frontend-bootcamp/index.html",
     "main.6037c37f.css.map": "/project4-frontend-bootcamp/static/css/main.6037c37f.css.map",
-    "main.029dc1e9.js.map": "/project4-frontend-bootcamp/static/js/main.029dc1e9.js.map"
+    "main.7dc3063c.js.map": "/project4-frontend-bootcamp/static/js/main.7dc3063c.js.map"
   },
   "entrypoints": [
     "static/css/main.6037c37f.css",
-    "static/js/main.029dc1e9.js"
+    "static/js/main.7dc3063c.js"
   ]
 }
