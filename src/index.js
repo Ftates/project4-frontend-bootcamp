@@ -1,7 +1,7 @@
 // Packages
 import React, { createContext, useContext, useState } from "react";
 import ReactDOM from "react-dom/client";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { HashRouter, Routes, Route, Switch } from "react-router-dom";
 import AuthProvider from "./AuthContext/AuthContext.js";
 
 // Import Route Components
@@ -81,11 +81,11 @@ root.render(
         }}
       />
     }
-    <BrowserRouter>
+    <HashRouter>
       <AuthProvider>
         <Routes>
           <Route
-            path="/"
+            exact hash="/"
             element={
               <Overlay
                 onChildEvent={(e) => {
@@ -95,37 +95,37 @@ root.render(
             }
           >
             <Route
-              path="/"
+              exact hash="/"
               element={<App onChildEvent={(e) => handleAnimationEvent(e)} />}
             />
             <Route
-              path="/learnMore"
+              exact hash="/learnMore"
               element={<LearnMore onChildEvent={retrieveNavigateEvent} />}
             >
               <Route
-                path="/learnMore/word0"
+                exact hash="/learnMore/word0"
                 element={
                   <Word0 onChildEvent={(e) => handleAnimationEvent(e)} />
                 }
               />
             </Route>
             <Route
-              path="/login"
+              exact hash="/login"
               element={<Login onChildEvent={(e) => handleAnimationEvent(e)} />}
             />
             <Route
-              path="/register"
+              exact hash="/register"
               element={
                 <Register onChildEvent={(e) => handleAnimationEvent(e)} />
               }
             />
-            <Route path="/dashboard" element={<Dashboard onChildEvent={(e)=> handleAnimationEvent(e)}/>} />
-            <Route path="/walletList" element={<WalletList onChildEvent={(e)=> handleAnimationEvent(e)}/>} />
-            <Route path="/transactions" element={<Transactions onChildEvent={(e)=> handleAnimationEvent(e)}/>} />
+            <Route exact hash="/dashboard" element={<Dashboard onChildEvent={(e)=> handleAnimationEvent(e)}/>} />
+            <Route exact hash="/walletList" element={<WalletList onChildEvent={(e)=> handleAnimationEvent(e)}/>} />
+            <Route exact hash="/transactions" element={<Transactions onChildEvent={(e)=> handleAnimationEvent(e)}/>} />
           </Route>
         </Routes>
       </AuthProvider>
-    </BrowserRouter>
+    </HashRouter>
   </>
   // </React.StrictMode>
 );
